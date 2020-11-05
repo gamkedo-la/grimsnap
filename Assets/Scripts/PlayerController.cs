@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MouseControl : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public float hp = 1000.0f;
     public float speed = 10.0f;
     Vector3 goToPoint;
     NavMeshAgent navMeshAgent;
-    // Start is called before the first frame update
+
+    private GameObject targetObject = null;
+    
     void Start()
     {
         goToPoint = transform.position;
         navMeshAgent = this.GetComponent<NavMeshAgent>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("mouse clicked");
-
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rhInfo;
             int mouseMask = ~LayerMask.GetMask("PlayerCharacter");
@@ -29,6 +29,17 @@ public class MouseControl : MonoBehaviour
             if (Physics.Raycast(mouseRay, out rhInfo, 50.0f, mouseMask))
             {
                 Debug.Log("Mouse ray hit:" + rhInfo.collider.gameObject.name + " at " + rhInfo.point);
+
+                if (rhInfo.collider.gameObject.tag == "Enemy")
+                {
+                    targetObject = rhInfo.collider.gameObject;
+                    targetObject.transform.GetChild(1).gameObject.SetActive(true);
+                }
+                else if(targetObject != null)
+                {
+                    targetObject.transform.GetChild(1).gameObject.SetActive(false);
+                    targetObject = null;
+                }
 
                 goToPoint = rhInfo.point;
                 goToPoint.y = transform.position.y;
