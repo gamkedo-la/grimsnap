@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Movement;
 
 public class PlayerController : MonoBehaviour
 {
     public float hp = 1000.0f;
-    public float speed = 10.0f;
+    public float speed = 10.0f; 
     Vector3 goToPoint;
     NavMeshAgent navMeshAgent;
 
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButton(0)) // Changed GetMouseButtonDown to GetMouseButton so the player can hold and drag the mouse to move
+        if (Input.GetMouseButtonDown(0))
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rhInfo;
