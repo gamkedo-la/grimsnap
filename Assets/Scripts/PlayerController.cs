@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0)) // Changed GetMouseButtonDown to GetMouseButton so the player can hold and drag the mouse to move
         {
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rhInfo;
