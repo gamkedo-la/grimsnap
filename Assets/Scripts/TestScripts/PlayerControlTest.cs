@@ -7,38 +7,44 @@ using UnityEditor;
 public class PlayerControlTest : MonoBehaviour
 {
     PlayerInput playerInput;
-    Move move;
+    MoveTest move;
+    TagsTest tagsSaved;
     public float speed = 50;
 
     void Start()
     {
-        move = GetComponent<Move>();
+        move = GetComponent<MoveTest>();
         playerInput = GetComponent<PlayerInput>();
     }
 
     void Update()
     {
-        ClickToMove();
+        CheckPrimaryButton();
     }
 
-    void ClickToMove() 
+    void CheckPrimaryButton() 
     {
         if (playerInput.leftClick) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit raycastHit;
-            if (Physics.Raycast(ray, out raycastHit, 100)) 
+            if (Physics.Raycast(ray, out raycastHit, 100))
             {
-                if (raycastHit.transform.tag == "Ground")
-                {
-                    move.MoveToTarget(speed, raycastHit.point);
-                }
-
-                if (raycastHit.transform.tag == "Enemy")
-                {
-                    move.MoveToTarget(speed, raycastHit.point); // Change this to follow target later
-                }
+                CheckForAction(raycastHit);
             }
+        }
+    }
+
+    private void CheckForAction(RaycastHit raycastHit)
+    {
+        tagsSaved = raycastHit.transform.GetComponent<TagsTest>();
+        if (tagsSaved.tags.Contains(Tags.Ground)) 
+        {
+            move.SetPosition(speed, raycastHit.point);
+        }
+        if (tagsSaved.tags.Contains(Tags.CanTarget))
+        {
+            move.SetTarget(speed, 2, raycastHit.transform); // Change the hardcoded distance to something Serialized
         }
     }
 }
