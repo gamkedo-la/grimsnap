@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Movement;
 using UnityEditor;
+using UnityEngine.AI;
 
 public class PlayerControlTest : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class PlayerControlTest : MonoBehaviour
     MoveTest move;
     TagsTest tagsSaved;
     public float speed = 50;
+    Transform target = null;
+    float distanceToStop = 2;
+    RaycastHit raycastHit;
 
     void Start()
     {
@@ -19,32 +23,42 @@ public class PlayerControlTest : MonoBehaviour
 
     void Update()
     {
-        CheckPrimaryButton();
+        CheckPrimaryButtonForTarget();
+        CheckForAction();
     }
 
-    void CheckPrimaryButton() 
+    /// <summary>
+    /// Gives raycastHit data on left click and updates target with a new transform if a new target is aquired
+    /// </summary>
+    void CheckPrimaryButtonForTarget() 
     {
         if (playerInput.leftClick) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit raycastHit;
             if (Physics.Raycast(ray, out raycastHit, 100))
             {
-                CheckForAction(raycastHit);
+                if (raycastHit.transform != target)
+                {
+                    target = raycastHit.transform;
+                    tagsSaved = raycastHit.transform.GetComponent<TagsTest>();
+                }
             }
         }
     }
 
-    private void CheckForAction(RaycastHit raycastHit)
+    private void CheckForAction()
     {
-        tagsSaved = raycastHit.transform.GetComponent<TagsTest>();
         if (tagsSaved.tags.Contains(Tags.Ground)) 
         {
-            move.SetPosition(speed, raycastHit.point);
+            move.MoveToTarget(speed, raycastHit.point);
         }
-        if (tagsSaved.tags.Contains(Tags.CanTarget))
+        if (tagsSaved.tags.Contains(Tags.Enemy) && distanceToStop < VectorMath.DistanceAbs(transform.position, raycastHit.transform.position))
         {
-            move.SetTarget(speed, 2, raycastHit.transform); // Change the hardcoded distance to something Serialized
+            move.MoveToTarget(speed, target.position);
+        }
+        if (tagsSaved.tags.Contains(Tags.Enemy) && distanceToStop > VectorMath.DistanceAbs(transform.position, raycastHit.transform.position))
+        {
+            move.StopMoving();
         }
     }
 }
