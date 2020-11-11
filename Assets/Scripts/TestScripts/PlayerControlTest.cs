@@ -5,8 +5,10 @@ using Movement;
 using UnityEditor;
 using UnityEngine.AI;
 
+//Processes data and issues commands, nothing else
 public class PlayerControlTest : MonoBehaviour
 {
+    // This script needs to get distanceToStop and speed from other data sources
     PlayerInput playerInput;
     MoveTest move;
     TagsTest tagsSaved;
@@ -48,17 +50,30 @@ public class PlayerControlTest : MonoBehaviour
 
     private void CheckForAction()
     {
-        if (tagsSaved.tags.Contains(Tags.Ground)) 
+        MoveToTerrain();
+        FollowAndAttackTarget();
+    }
+
+    private void FollowAndAttackTarget()
+    {
+        if (tagsSaved.tags.Contains(Tags.CanTarget))
+        {
+            if (!VectorMath.WithinDistance(distanceToStop, transform.position, raycastHit.transform.position))
+            {
+                move.MoveToTarget(speed, target.position);
+            }
+            else
+            {
+                move.StopMoving();
+            }
+        }
+    }
+
+    private void MoveToTerrain()
+    {
+        if (tagsSaved.tags.Contains(Tags.Ground))
         {
             move.MoveToTarget(speed, raycastHit.point);
-        }
-        if (tagsSaved.tags.Contains(Tags.Enemy) && distanceToStop < VectorMath.DistanceAbs(transform.position, raycastHit.transform.position))
-        {
-            move.MoveToTarget(speed, target.position);
-        }
-        if (tagsSaved.tags.Contains(Tags.Enemy) && distanceToStop > VectorMath.DistanceAbs(transform.position, raycastHit.transform.position))
-        {
-            move.StopMoving();
         }
     }
 }

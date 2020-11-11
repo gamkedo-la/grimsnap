@@ -6,6 +6,9 @@ using UnityEngine.AI;
 
 namespace Movement 
 {
+    /// <summary>
+    /// Move the character to a given point, with no conditionals
+    /// </summary>
     public class MoveTest : MonoBehaviour
     {
 
@@ -14,11 +17,6 @@ namespace Movement
         void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
-        }
-
-        private void Update()
-        {
-            
         }
 
         public void MoveToTarget(float speed, Vector3 pos)
