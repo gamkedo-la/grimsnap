@@ -50,15 +50,16 @@ public class PlayerControlTest : MonoBehaviour
 
     private void CheckForAction()
     {
+        if (raycastHit.transform == null) return;
         MoveToTerrain();
-        FollowAndAttackTarget();
+        FollowAndAttackTarget(distanceToStop);
     }
 
-    private void FollowAndAttackTarget()
+    private void FollowAndAttackTarget(float meleeRange)
     {
         if (tagsSaved.tags.Contains(Tags.CanTarget))
         {
-            if (!VectorMath.WithinDistance(distanceToStop, transform.position, raycastHit.transform.position))
+            if (!VectorMath.WithinDistance(meleeRange, transform.position, raycastHit.transform.position))
             {
                 move.MoveToTarget(speed, target.position);
             }
