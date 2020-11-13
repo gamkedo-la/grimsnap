@@ -13,14 +13,18 @@ public class PlayerControlTest : MonoBehaviour
     MoveTest move;
     TagsTest tagsSaved;
     public float speed = 50;
-    Transform target = null;
+    //Transform target = null;
     float distanceToStop = 2;
     RaycastHit raycastHit;
+    Animator animator;
+    Vector3 destination = new Vector3(0, 0, 0);
+    Health target;
 
     void Start()
     {
         move = GetComponent<MoveTest>();
         playerInput = GetComponent<PlayerInput>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -39,11 +43,7 @@ public class PlayerControlTest : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out raycastHit, 100))
             {
-                if (raycastHit.transform != target)
-                {
-                    target = raycastHit.transform;
-                    tagsSaved = raycastHit.transform.GetComponent<TagsTest>();
-                }
+                target = raycastHit.transform.GetComponent<Health>();
             }
         }
     }
@@ -57,23 +57,32 @@ public class PlayerControlTest : MonoBehaviour
 
     private void FollowAndAttackTarget(float meleeRange)
     {
-        if (tagsSaved.tags.Contains(Tags.CanTarget))
+        if (target.isDead) return;
+
+        if (!VectorMath.WithinDistance(meleeRange, transform.position, raycastHit.transform.position))
         {
-            if (!VectorMath.WithinDistance(meleeRange, transform.position, raycastHit.transform.position))
-            {
-                move.MoveToTarget(speed, target.position);
-            }
-            else
-            {
-                move.StopMoving();
-            }
+            animator.SetBool("isWalking", true);
+            move.MoveToTarget(speed, target.transform.position);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+            move.StopMoving();
         }
     }
 
     private void MoveToTerrain()
     {
-        if (tagsSaved.tags.Contains(Tags.Ground))
+        float number = .1f;
+        if (transform.position.x <= raycastHit.point.x + number && transform.position.z <= raycastHit.point.z + number &&
+            transform.position.x >= raycastHit.point.x - number && transform.position.z >= raycastHit.point.z - number)
         {
+            animator.SetBool("isWalking", false);
+            return;
+        }
+        if (raycastHit.transform.tag == "Ground")
+        {
+            animator.SetBool("isWalking", true);
             move.MoveToTarget(speed, raycastHit.point);
         }
     }

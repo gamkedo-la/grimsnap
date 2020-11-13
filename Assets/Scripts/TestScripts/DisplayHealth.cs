@@ -16,7 +16,6 @@ public class DisplayHealth : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Reporting for duty");
         slider.value = health.health / health.maxHealth;
     }
 }

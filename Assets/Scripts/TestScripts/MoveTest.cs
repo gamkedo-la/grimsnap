@@ -18,6 +18,10 @@ namespace Movement
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
+        private void Update()
+        {
+            
+        }
 
         public void MoveToTarget(float speed, Vector3 pos)
         {
@@ -28,6 +32,11 @@ namespace Movement
         public void StopMoving()
         {
             navMeshAgent.SetDestination(transform.position);
+        }
+
+        public NavMeshAgent GetNavMeshAgent()
+        {
+            return navMeshAgent;
         }
     }
 
