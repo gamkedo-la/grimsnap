@@ -9,7 +9,7 @@ namespace Movement
     /// <summary>
     /// Move the character to a given point, with no conditionals
     /// </summary>
-    public class MoveTest : MonoBehaviour
+    public class Move : MonoBehaviour
     {
 
         NavMeshAgent navMeshAgent;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControlTest : MonoBehaviour
+public class EnemyControl : MonoBehaviour
 {
 
     void Start()

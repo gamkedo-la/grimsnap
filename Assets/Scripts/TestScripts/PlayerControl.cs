@@ -6,23 +6,26 @@ using UnityEditor;
 using UnityEngine.AI;
 
 //Processes data and issues commands, nothing else
-public class PlayerControlTest : MonoBehaviour
+public class PlayerControl : MonoBehaviour
 {
-    // This script needs to get distanceToStop and speed from other data sources
+    //Component Data
     PlayerInput playerInput;
-    MoveTest move;
-    TagsTest tagsSaved;
-    public float speed = 50;
-    //Transform target = null;
-    float distanceToStop = 2;
-    RaycastHit raycastHit;
+    Move move;
     Animator animator;
-    Vector3 destination = new Vector3(0, 0, 0);
+
+    // Need to pull speed from movementData script, distance to stop from equipped melee
+    public float speed = 50;
+    float meleeRange = 2;
+
+    //Data from ray cast
+    RaycastHit raycastHit;
     Health target;
+
+    //Other entities such as enemy and misc need access to MoveToTerrain and FollowAndAttackTarget... move to generic class and change to return bools?
 
     void Start()
     {
-        move = GetComponent<MoveTest>();
+        move = GetComponent<Move>();
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponentInChildren<Animator>();
     }
@@ -51,15 +54,17 @@ public class PlayerControlTest : MonoBehaviour
     private void CheckForAction()
     {
         if (raycastHit.transform == null) return;
+        if (raycastHit.transform.tag != "Ground" && raycastHit.transform.tag != "Obstacle")
+        {
+            FollowTarget();
+            return;
+        }
         MoveToTerrain();
-        FollowAndAttackTarget(distanceToStop);
     }
 
-    private void FollowAndAttackTarget(float meleeRange)
+    private void FollowTarget()
     {
-        if (target.isDead) return;
-
-        if (!VectorMath.WithinDistance(meleeRange, transform.position, raycastHit.transform.position))
+        if (Conditionals.IsTargetOutOfRangeAndAlive(meleeRange, target, transform.position))
         {
             animator.SetBool("isWalking", true);
             move.MoveToTarget(speed, target.transform.position);
@@ -73,15 +78,16 @@ public class PlayerControlTest : MonoBehaviour
 
     private void MoveToTerrain()
     {
-        float number = .1f;
-        if (transform.position.x <= raycastHit.point.x + number && transform.position.z <= raycastHit.point.z + number &&
-            transform.position.x >= raycastHit.point.x - number && transform.position.z >= raycastHit.point.z - number)
+        float number = .1f; // Move this elsewhere
+        if (!Conditionals.IsAroundAtPoint(transform.position, raycastHit.point, number))
         {
+            Debug.Log("We're here");
             animator.SetBool("isWalking", false);
             return;
         }
-        if (raycastHit.transform.tag == "Ground")
+        else
         {
+            Debug.Log("Now we're here");
             animator.SetBool("isWalking", true);
             move.MoveToTarget(speed, raycastHit.point);
         }
