@@ -4,6 +4,7 @@ using UnityEngine;
 using Movement;
 using UnityEditor;
 using UnityEngine.AI;
+using MyMath;
 
 //Processes data and issues commands, nothing else
 public class PlayerControl : MonoBehaviour
@@ -12,10 +13,12 @@ public class PlayerControl : MonoBehaviour
     PlayerInput playerInput;
     Move move;
     Animator animator;
+    Attack attack;
 
-    // Need to pull speed from movementData script, distance to stop from equipped melee
+    // Need to pull speed from movementData script, meleeRange and damage from equipped melee
     public float speed = 50;
     float meleeRange = 2;
+    float damage = 5;
 
     //Data from ray cast
     RaycastHit raycastHit;
@@ -28,6 +31,7 @@ public class PlayerControl : MonoBehaviour
         move = GetComponent<Move>();
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponentInChildren<Animator>();
+        attack = GetComponent<Attack>();
     }
 
     void Update()
@@ -64,30 +68,33 @@ public class PlayerControl : MonoBehaviour
 
     private void FollowTarget()
     {
-        if (Conditionals.IsTargetOutOfRangeAndAlive(meleeRange, target, transform.position))
+        if (!target.isDead && !animator.GetBool("Attack1"))
         {
-            animator.SetBool("isWalking", true);
-            move.MoveToTarget(speed, target.transform.position);
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-            move.StopMoving();
+            if (!VectorMath.IsWithinDistance(meleeRange, transform.position, target.transform.position))
+            {
+                animator.SetBool("isWalking", true);
+                move.MoveToTarget(speed, target.transform.position);
+            }
+            else
+            {
+                animator.SetBool("isWalking", false);
+                animator.SetTrigger("Attack1");
+                move.StopMoving();
+                attack.AttackTarget(target, damage);
+            }
         }
     }
 
     private void MoveToTerrain()
     {
         float number = .1f; // Move this elsewhere
-        if (!Conditionals.IsAroundAtPoint(transform.position, raycastHit.point, number))
+        if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
         {
-            Debug.Log("We're here");
             animator.SetBool("isWalking", false);
             return;
         }
         else
         {
-            Debug.Log("Now we're here");
             animator.SetBool("isWalking", true);
             move.MoveToTarget(speed, raycastHit.point);
         }

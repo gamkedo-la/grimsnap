@@ -12,4 +12,10 @@ public class Health : MonoBehaviour
     {
         health = maxHealth;
     }
+
+    public void TakeDamage(float damage)
+    {
+        Debug.Log("Taking Damage" + transform.name);
+        health -= damage;
+    }
 }
