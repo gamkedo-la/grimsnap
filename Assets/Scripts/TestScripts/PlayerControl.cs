@@ -17,8 +17,8 @@ public class PlayerControl : MonoBehaviour
 
     // Need to pull speed from movementData script, meleeRange and damage from equipped melee
     public float speed = 50;
-    float meleeRange = 2;
-    float damage = 5;
+    public float meleeRange = 2;
+    public float damage = 5;
 
     //Data from ray cast
     RaycastHit raycastHit;
