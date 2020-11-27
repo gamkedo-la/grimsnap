@@ -27,13 +27,15 @@ public class EnemyController : MonoBehaviour
     //public Collider[] SphereOverlapArray;
     public GameObject Player;
     public int VisualRange;
-    //public int WanderRadius;
+    public int WanderRadius;
+    int WR;
 
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
         Player = GameObject.FindGameObjectWithTag("Player");
+        WR = WanderRadius;
 
     }
     
@@ -59,8 +61,8 @@ public class EnemyController : MonoBehaviour
 
         if (!rest)
         {
-            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange 
-                /*&& Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < WanderRadius*/)
+            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange && 
+                Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < WanderRadius)
             {
                 transform.position = Vector3.MoveTowards(transform.position, Player.transform.position,
                     speed * Time.deltaTime);
@@ -71,6 +73,11 @@ public class EnemyController : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
 
+                if(Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) > WanderRadius)
+                {
+                    WanderRadius = 0;
+
+                }
 
             }
             else
@@ -79,6 +86,7 @@ public class EnemyController : MonoBehaviour
                 {
                     //navMeshAgent.SetDestination(patrolPoints[patrolIndex++].position);
                     patrolIndex++;
+                    WanderRadius = WR;
 
                     if (patrolIndex >= patrolPoints.Length)
                     {
