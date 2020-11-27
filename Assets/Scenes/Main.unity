@@ -1129,7 +1129,8 @@ MonoBehaviour:
   animator: {fileID: 2146457101}
   Player: {fileID: 0}
   VisualRange: 5
-  WanderRadius: 30
+  WanderRadius: 10
+  WR: 0
 --- !u!54 &33850056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33724,7 +33725,8 @@ MonoBehaviour:
   animator: {fileID: 156883593}
   Player: {fileID: 0}
   VisualRange: 5
-  WanderRadius: 30
+  WanderRadius: 10
+  WR: 0
 --- !u!195 &1494199943
 NavMeshAgent:
   m_ObjectHideFlags: 0

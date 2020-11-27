@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
     public GameObject Player;
     public int VisualRange;
     public int WanderRadius;
-    int WR;
+    public int WR;
 
     void Start()
     {
@@ -61,8 +61,18 @@ public class EnemyController : MonoBehaviour
 
         if (!rest)
         {
-            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange && 
-                Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < WanderRadius)
+
+            int PPPrevious = patrolIndex - 1;
+            if(PPPrevious < 0)
+            {
+                PPPrevious = patrolPoints.Length - 1;
+            }
+
+
+            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange &&
+                Vector3.Distance(transform.position,
+                    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position))
+                    < WanderRadius)
             {
                 transform.position = Vector3.MoveTowards(transform.position, Player.transform.position,
                     speed * Time.deltaTime);
@@ -73,11 +83,20 @@ public class EnemyController : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
 
-                if(Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) > WanderRadius)
-                {
-                    WanderRadius = 0;
+                //int PPPrevious = patrolIndex - 1;
+                //if(PPPrevious < 0)
+                //{
+                //    PPPrevious = patrolPoints.Length - 1;
+                //}
 
-                }
+
+                //if(Vector3.Distance(transform.position, 
+                //    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position)) 
+                //    > WanderRadius)
+                //{
+                //    WanderRadius = 0;
+
+                //}
 
             }
             else
@@ -141,4 +160,19 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    private Vector3 ClosestPointOnLine(Vector3 LineOrigin, Vector3 LineEnd, Vector3 Point)
+    {
+
+        Vector3 heading = (LineEnd - LineOrigin);
+        float magnitudeMax = heading.magnitude;
+        heading.Normalize();
+
+        Vector3 lhs = Point - LineOrigin;
+        float dotP = Vector3.Dot(lhs, heading);
+        dotP = Mathf.Clamp(dotP, 0f, magnitudeMax);
+        return (LineOrigin + heading * dotP);
+
+    }
+
 }

@@ -17,5 +17,10 @@ public class Health : MonoBehaviour
     {
         Debug.Log("Taking Damage" + transform.name);
         health -= damage;
+        if(GetComponent<EnemyController>() != null)
+        {
+            GetComponent<EnemyController>().WanderRadius = GetComponent<EnemyController>().WR;
+
+        }
     }
 }
