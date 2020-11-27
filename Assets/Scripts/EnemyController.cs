@@ -24,36 +24,78 @@ public class EnemyController : MonoBehaviour
     private float restTimer = 0.0f;
     private bool rest = true;
 
+    //public Collider[] SphereOverlapArray;
+    public GameObject Player;
+    public int VisualRange;
+    //public int WanderRadius;
+
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
+        Player = GameObject.FindGameObjectWithTag("Player");
+
     }
     
     void Update()
     {
+        //OverlapSphere returns an array of colliders but by using the layer mask it 
+        //should only ever return one object, the player character
+
+        //SphereOverlapArray = Physics.OverlapSphere(transform.position, VisualRange);
+        //foreach(var hitCollider in SphereOverlapArray)
+        //{
+        //    if(hitCollider.gameObject.tag == "Player")
+        //    {
+
+        //        target = hitCollider.gameObject;
+        //    }
+
+        //}
+
+
+
+
+
         if (!rest)
         {
-            if (Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.5f)
+            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange 
+                /*&& Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < WanderRadius*/)
             {
-                //navMeshAgent.SetDestination(patrolPoints[patrolIndex++].position);
-                patrolIndex++;
-
-                if (patrolIndex >= patrolPoints.Length)
-                {
-                    patrolIndex = 0;
-                }
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[patrolIndex].position,
+                transform.position = Vector3.MoveTowards(transform.position, Player.transform.position,
                     speed * Time.deltaTime);
                 animator.SetBool("isWalking", true);
 
-                Vector3 targetDirection = patrolPoints[patrolIndex].position - transform.position;
+                Vector3 targetDirection = Player.transform.position- transform.position;
                 float singleStep = speed * 4.0f * Time.deltaTime;
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
+
+
+            }
+            else
+            {
+                if (Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.5f)
+                {
+                    //navMeshAgent.SetDestination(patrolPoints[patrolIndex++].position);
+                    patrolIndex++;
+
+                    if (patrolIndex >= patrolPoints.Length)
+                    {
+                        patrolIndex = 0;
+                    }
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, patrolPoints[patrolIndex].position,
+                        speed * Time.deltaTime);
+                    animator.SetBool("isWalking", true);
+
+                    Vector3 targetDirection = patrolPoints[patrolIndex].position - transform.position;
+                    float singleStep = speed * 4.0f * Time.deltaTime;
+                    Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+                    transform.rotation = Quaternion.LookRotation(newDirection);
+                }
             }
         }
         else
