@@ -83,20 +83,13 @@ public class EnemyController : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
 
-                //int PPPrevious = patrolIndex - 1;
-                //if(PPPrevious < 0)
-                //{
-                //    PPPrevious = patrolPoints.Length - 1;
-                //}
+                if(Vector3.Distance(transform.position, 
+                    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position)) 
+                    > WanderRadius)
+                {
+                    WanderRadius = 0;
 
-
-                //if(Vector3.Distance(transform.position, 
-                //    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position)) 
-                //    > WanderRadius)
-                //{
-                //    WanderRadius = 0;
-
-                //}
+                }
 
             }
             else
