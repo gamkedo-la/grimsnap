@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     public Animator animator;
     
     private int patrolIndex = 0;
+    private int PPPrevious;
 
     private NavMeshAgent navMeshAgent;
     
@@ -30,12 +31,23 @@ public class EnemyController : MonoBehaviour
     public int WanderRadius;
     public int WR;
 
+    public float AttackTimer;
+    public float AttackLoop;
+    private float AttackReset;
+
+    public int AttackDamage;
+
+    public int AttackRange;
+
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
         Player = GameObject.FindGameObjectWithTag("Player");
         WR = WanderRadius;
+               
+        AttackReset = AttackTimer;
+        
 
     }
     
@@ -55,45 +67,67 @@ public class EnemyController : MonoBehaviour
 
         //}
 
-
-
-
-
-        if (!rest)
+        if (Vector3.Distance(transform.position, Player.transform.position) <= AttackRange)
         {
 
-            int PPPrevious = patrolIndex - 1;
-            if(PPPrevious < 0)
+            Vector3 targetDirection = Player.transform.position - transform.position;
+            float singleStep = speed * 4.0f * Time.deltaTime;
+            Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+            transform.rotation = Quaternion.LookRotation(newDirection);
+
+
+            animator.SetBool("isAttacking", true);
+            AttackTimer -= Time.deltaTime;
+            if (AttackTimer <= 0)
             {
-                PPPrevious = patrolPoints.Length - 1;
+                GetComponent<Attack>().AttackTarget(Player.GetComponent<Health>(), AttackDamage);
+                AttackTimer = AttackLoop;
+
             }
 
 
-            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange &&
-                Vector3.Distance(transform.position,
-                    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position))
-                    < WanderRadius)
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+            AttackTimer = AttackReset;
+
+
+
+             
+
+
+            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange 
+                && Vector3.Distance(transform.position,
+                ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, 
+                Player.transform.position))
+                < WanderRadius)
             {
+
+                animator.SetBool("isWalking", true);
                 transform.position = Vector3.MoveTowards(transform.position, Player.transform.position,
                     speed * Time.deltaTime);
-                animator.SetBool("isWalking", true);
 
-                Vector3 targetDirection = Player.transform.position- transform.position;
+
+                Vector3 targetDirection = Player.transform.position - transform.position;
                 float singleStep = speed * 4.0f * Time.deltaTime;
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
 
-                if(Vector3.Distance(transform.position, 
-                    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position)) 
+                if (Vector3.Distance(transform.position,
+                    ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, Player.transform.position))
                     > WanderRadius)
                 {
                     WanderRadius = 0;
 
                 }
-
+                return;
             }
-            else
+
+
+            if (!rest)
             {
+
                 if (Vector3.Distance(transform.position, patrolPoints[patrolIndex].position) < 0.5f)
                 {
                     //navMeshAgent.SetDestination(patrolPoints[patrolIndex++].position);
@@ -103,6 +137,12 @@ public class EnemyController : MonoBehaviour
                     if (patrolIndex >= patrolPoints.Length)
                     {
                         patrolIndex = 0;
+                    }
+
+                    PPPrevious = patrolIndex - 1;
+                    if (PPPrevious < 0)
+                    {
+                        PPPrevious = patrolPoints.Length - 1;
                     }
                 }
                 else
@@ -116,24 +156,25 @@ public class EnemyController : MonoBehaviour
                     Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
                     transform.rotation = Quaternion.LookRotation(newDirection);
                 }
-            }
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-        }
 
-        if (restTimer <= 0.0f)
-        {
-            rest = !rest;
-            if (rest)
-                restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
+            }
             else
-                restTimer = UnityEngine.Random.Range(restAfterMinDelay, restAfterMaxDelay);
-        }
-        else
-        {
-            restTimer -= Time.deltaTime;
+            {
+                animator.SetBool("isWalking", false);
+            }
+
+            if (restTimer <= 0.0f)
+            {
+                rest = !rest;
+                if (rest)
+                    restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
+                else
+                    restTimer = UnityEngine.Random.Range(restAfterMinDelay, restAfterMaxDelay);
+            }
+            else
+            {
+                restTimer -= Time.deltaTime;
+            }
         }
         
     }
