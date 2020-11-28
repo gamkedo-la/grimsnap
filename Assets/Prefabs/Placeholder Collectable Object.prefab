@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2555325001593747577}
   - component: {fileID: 3577251142077060840}
   - component: {fileID: 2008380280413967165}
-  m_Layer: 0
-  m_Name: Placeholder Quest Item 1
+  m_Layer: 2
+  m_Name: Placeholder Collectable Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
