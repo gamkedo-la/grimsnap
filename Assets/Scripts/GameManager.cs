@@ -20,5 +20,10 @@ public class GameManager : MonoBehaviour
         {
             loadScene.LoadGameOverScreenScene();
         }
+
+        if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
+        {
+            loadScene.LoadWinScreenScene();
+        }
     }
 }

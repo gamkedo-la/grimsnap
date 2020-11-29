@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            other.GetComponent<InventoryManager>().CollectQuestItem(this);
         }
     }
-
 }
