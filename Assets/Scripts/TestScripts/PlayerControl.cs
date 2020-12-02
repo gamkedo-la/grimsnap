@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
     RaycastHit raycastHit;
     Health target;
 
+    public GameObject pickUpTarget;
+
     //Other entities such as enemy and misc need access to MoveToTerrain and FollowAndAttackTarget... move to generic class and change to return bools?
 
     void Start()
@@ -58,10 +60,18 @@ public class PlayerControl : MonoBehaviour
     private void CheckForAction()
     {
         if (raycastHit.transform == null) return;
-        if (raycastHit.transform.tag != "Ground" && raycastHit.transform.tag != "Obstacle")
+        if (raycastHit.transform.tag == "Enemy")
         {
+
             FollowTarget();
+            //Debug.Log("following " + target.name);
             return;
+        }
+        if (raycastHit.transform.tag == "Equipment")
+        {
+            //Debug.Log("hit equipment");
+            pickUpTarget = raycastHit.transform.gameObject;
+
         }
         MoveToTerrain();
     }
