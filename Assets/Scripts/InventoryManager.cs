@@ -10,7 +10,7 @@ public class InventoryManager : MonoBehaviour
 
     private GameObject InventoryMenu;
 
-    public int InventorySize = 10;
+    public int InventorySize = 8;
 
     private void Start()
     {
@@ -39,5 +39,13 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Inventory is full");
 
         }
+    }
+
+    public void DropWeapon(GameObject weapon)
+    {
+
+        weaponsInInv.Remove(weapon);
+        weapon.transform.position = transform.position + new Vector3(Random.Range(.03f, .05f), Random.Range(.03f, .05f));
+
     }
 }

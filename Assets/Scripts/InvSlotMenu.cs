@@ -9,7 +9,9 @@ public class InvSlotMenu : MonoBehaviour
     GameObject d;
     GameObject r;
 
-    
+    private int slot;
+
+    public GameObject WeaponRef;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,9 @@ public class InvSlotMenu : MonoBehaviour
         n = transform.Find("Name").gameObject;
         d = transform.Find("damage").gameObject;
         r = transform.Find("Range").gameObject;
+
+
+
     }
 
     // Update is called once per frame
@@ -25,8 +30,9 @@ public class InvSlotMenu : MonoBehaviour
         
     }
 
-    public void Populate(GameObject w)
+    public void Populate(GameObject w, int s)
     {
+        WeaponRef = w;
         n.GetComponent<Text>().text = w.name;
         d.GetComponent<Text>().text = w.GetComponent<EquipableWeapon>().GetDamage().ToString();
         r.GetComponent<Text>().text = w.GetComponent<EquipableWeapon>().GetRange().ToString();

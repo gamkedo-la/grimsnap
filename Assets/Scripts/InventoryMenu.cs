@@ -11,10 +11,15 @@ public class InventoryMenu : MonoBehaviour
 
     bool Active = false;
 
+    private PlayerControl Player;
+    private InventoryManager PlayerInv;
+
     // Start is called before the first frame update
     void Start()
     {
         current = 0;
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        PlayerInv = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryManager>();
     }
 
     // Update is called once per frame
@@ -26,6 +31,8 @@ public class InventoryMenu : MonoBehaviour
             {
                 GetComponent<CanvasGroup>().alpha = 1;
                 GetComponent<CanvasGroup>().interactable = true;
+                GetComponent<CanvasGroup>().blocksRaycasts = true;
+                Player.OpenMenu();
                 Active = true;
                 
             }
@@ -33,6 +40,8 @@ public class InventoryMenu : MonoBehaviour
             {
                 GetComponent<CanvasGroup>().alpha = 0;
                 GetComponent<CanvasGroup>().interactable = false;
+                GetComponent<CanvasGroup>().blocksRaycasts = false;
+                Player.CloseMenu();
                 Active = false;
             }
         }
@@ -41,13 +50,17 @@ public class InventoryMenu : MonoBehaviour
     public void AddItem(GameObject item)
     {
 
-        InvSlots[current].GetComponent<InvSlotMenu>().Populate(item);
+        InvSlots[current].GetComponent<InvSlotMenu>().Populate(item, current);
+        current++;
 
     }
 
-    public void DropItem()
+    public void DropItem(int slot)
     {
 
+        PlayerInv.DropWeapon(InvSlots[slot].GetComponent<InvSlotMenu>().WeaponRef);
+
+        InvSlots[slot].GetComponent<InvSlotMenu>().Populate(null, current);
 
 
 

@@ -26,6 +26,8 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject pickUpTarget;
 
+    private bool MenuOpen = false;
+
     //Other entities such as enemy and misc need access to MoveToTerrain and FollowAndAttackTarget... move to generic class and change to return bools?
 
     void Start()
@@ -52,7 +54,10 @@ public class PlayerControl : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out raycastHit, 100))
             {
-                target = raycastHit.transform.GetComponent<Health>();
+                if (MenuOpen == false)
+                {
+                    target = raycastHit.transform.GetComponent<Health>();
+                }
             }
         }
     }
@@ -108,5 +113,19 @@ public class PlayerControl : MonoBehaviour
             animator.SetBool("isWalking", true);
             move.MoveToTarget(speed, raycastHit.point);
         }
+    }
+
+    public void OpenMenu()
+    {
+
+        MenuOpen = true;
+
+    }
+
+    public void CloseMenu()
+    {
+
+        MenuOpen = false;
+
     }
 }
