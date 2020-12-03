@@ -54,10 +54,10 @@ public class PlayerControl : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out raycastHit, 100))
             {
-                if (MenuOpen == false)
-                {
+                
                     target = raycastHit.transform.GetComponent<Health>();
-                }
+                    //Debug.Log(raycastHit.transform.gameObject.name + "hit");
+                
             }
         }
     }
@@ -102,16 +102,19 @@ public class PlayerControl : MonoBehaviour
 
     private void MoveToTerrain()
     {
-        float number = .1f; // Move this elsewhere
-        if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
+        if (MenuOpen == false)
         {
-            animator.SetBool("isWalking", false);
-            return;
-        }
-        else
-        {
-            animator.SetBool("isWalking", true);
-            move.MoveToTarget(speed, raycastHit.point);
+            float number = .1f; // Move this elsewhere
+            if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
+            {
+                animator.SetBool("isWalking", false);
+                return;
+            }
+            else
+            {
+                animator.SetBool("isWalking", true);
+                move.MoveToTarget(speed, raycastHit.point);
+            }
         }
     }
 

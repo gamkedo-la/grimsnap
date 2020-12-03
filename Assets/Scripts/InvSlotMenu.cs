@@ -13,6 +13,10 @@ public class InvSlotMenu : MonoBehaviour
 
     public GameObject WeaponRef;
 
+    private InventoryMenu IM;
+
+    int SL;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +24,11 @@ public class InvSlotMenu : MonoBehaviour
         d = transform.Find("damage").gameObject;
         r = transform.Find("Range").gameObject;
 
+        n.GetComponent<Text>().text = "empty";
+        d.GetComponent<Text>().text = " ";
+        r.GetComponent<Text>().text = " ";
 
+        IM = GameObject.Find("InventoryMenu").GetComponent<InventoryMenu>();
 
     }
 
@@ -32,11 +40,35 @@ public class InvSlotMenu : MonoBehaviour
 
     public void Populate(GameObject w, int s)
     {
-        WeaponRef = w;
-        n.GetComponent<Text>().text = w.name;
-        d.GetComponent<Text>().text = w.GetComponent<EquipableWeapon>().GetDamage().ToString();
-        r.GetComponent<Text>().text = w.GetComponent<EquipableWeapon>().GetRange().ToString();
+        if (w != null)
+        {
 
+            WeaponRef = w;
+            n.GetComponent<Text>().text = w.name;
+            d.GetComponent<Text>().text = w.GetComponent<EquipableWeapon>().GetDamage().ToString();
+            r.GetComponent<Text>().text = w.GetComponent<EquipableWeapon>().GetRange().ToString();
+
+            SL = s;
+        }
+        else
+        {
+            WeaponRef = null;
+            n.GetComponent<Text>().text = "empty";
+            d.GetComponent<Text>().text = " ";
+            r.GetComponent<Text>().text = " ";
+
+        }
+
+    }
+
+    public void Drop()
+    {
+
+
+        if (WeaponRef != null)
+        {
+            IM.DropItem(SL);
+        }
 
     }
 

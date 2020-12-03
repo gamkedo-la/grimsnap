@@ -39,13 +39,21 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Inventory is full");
 
         }
+
+        GetComponent<PlayerControl>().pickUpTarget = null;
     }
 
     public void DropWeapon(GameObject weapon)
     {
 
         weaponsInInv.Remove(weapon);
-        weapon.transform.position = transform.position + new Vector3(Random.Range(.03f, .05f), Random.Range(.03f, .05f));
+        weapon.transform.position = transform.position + new Vector3(Random.Range(.03f, .05f), Random.Range(.03f, .05f), -0.5f);
+
+    }
+
+    public int GetCountOfWeapons()
+    {
+        return weaponsInInv.Count;
 
     }
 }

@@ -62,7 +62,16 @@ public class InventoryMenu : MonoBehaviour
 
         InvSlots[slot].GetComponent<InvSlotMenu>().Populate(null, current);
 
+        for (int c = current; c < PlayerInv.GetCountOfWeapons(); c++)
+        {
+            InvSlots[c].GetComponent<InvSlotMenu>().Populate(InvSlots[c + 1].GetComponent<InvSlotMenu>().WeaponRef, current);
+        }
 
+
+
+        current = PlayerInv.GetCountOfWeapons();
+
+        InvSlots[current].GetComponent<InvSlotMenu>().Populate(null, current);
 
     }
 
