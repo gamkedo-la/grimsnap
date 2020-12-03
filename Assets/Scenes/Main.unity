@@ -22207,6 +22207,7 @@ MonoBehaviour:
   speed: 10
   meleeRange: 2
   damage: 5
+  target: {fileID: 0}
   pickUpTarget: {fileID: 0}
 --- !u!114 &978466959
 MonoBehaviour:

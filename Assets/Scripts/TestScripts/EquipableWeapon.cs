@@ -33,20 +33,20 @@ public class EquipableWeapon : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
+    //private void OnCollisionEnter(Collision collision)
+    //{
         
-        if(collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerControl>().pickUpTarget == gameObject)
-        {
+    //    if(collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerControl>().pickUpTarget == gameObject)
+    //    {
             
 
-            Debug.Log(name + " getting picked up");
-            collision.gameObject.GetComponent<PlayerControl>().pickUpTarget = null;
-            collision.gameObject.GetComponent<InventoryManager>().CollectWeapon(gameObject);
-            transform.position += (Vector3.down * 20);
+    //        Debug.Log(name + " getting picked up");
+    //        collision.gameObject.GetComponent<PlayerControl>().pickUpTarget = null;
+    //        collision.gameObject.GetComponent<InventoryManager>().CollectWeapon(gameObject);
+    //        transform.position += (Vector3.down * 20);
 
-        }
+    //    }
 
-    }
+    //}
 
 }

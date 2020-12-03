@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     Move move;
     Animator animator;
     Attack attack;
+    InventoryManager Inv;
 
     // Need to pull speed from movementData script, meleeRange and damage from equipped melee
     public float speed = 50;
@@ -22,6 +23,7 @@ public class PlayerControl : MonoBehaviour
 
     //Data from ray cast
     RaycastHit raycastHit;
+    RaycastHit click;
     Health target;
 
     public GameObject pickUpTarget;
@@ -36,6 +38,7 @@ public class PlayerControl : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         animator = GetComponentInChildren<Animator>();
         attack = GetComponent<Attack>();
+        Inv = GetComponent<InventoryManager>();
     }
 
     void Update()
@@ -49,33 +52,43 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     void CheckPrimaryButtonForTarget() 
     {
-        if (playerInput.leftClick) 
+        if (playerInput.leftClick && MenuOpen == false) 
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out raycastHit, 100))
-            {
+            Physics.Raycast(ray, out raycastHit, 100);
+            //if (Physics.Raycast(ray, out raycastHit, 100))
+            //{
+
+            //       //target = raycastHit.transform.GetComponent<Health>();
+                    
                 
-                    target = raycastHit.transform.GetComponent<Health>();
-                    //Debug.Log(raycastHit.transform.gameObject.name + "hit");
-                
-            }
+            //}
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out click, 100);
+
+        }
+
+
     }
 
     private void CheckForAction()
     {
         if (raycastHit.transform == null) return;
-        if (raycastHit.transform.tag == "Enemy")
+        if (click.transform.tag == "Enemy")
         {
-
+            target = click.transform.GetComponent<Health>();
             FollowTarget();
             //Debug.Log("following " + target.name);
             return;
         }
-        if (raycastHit.transform.tag == "Equipment")
+        if (click.transform.tag == "Equipment")
         {
             //Debug.Log("hit equipment");
-            pickUpTarget = raycastHit.transform.gameObject;
+            pickUpTarget = click.transform.gameObject;
 
         }
         MoveToTerrain();
@@ -102,19 +115,16 @@ public class PlayerControl : MonoBehaviour
 
     private void MoveToTerrain()
     {
-        if (MenuOpen == false)
+        float number = .1f; // Move this elsewhere
+        if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
         {
-            float number = .1f; // Move this elsewhere
-            if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
-            {
-                animator.SetBool("isWalking", false);
-                return;
-            }
-            else
-            {
-                animator.SetBool("isWalking", true);
-                move.MoveToTarget(speed, raycastHit.point);
-            }
+            animator.SetBool("isWalking", false);
+            return;
+        }
+        else
+        {
+            animator.SetBool("isWalking", true);
+            move.MoveToTarget(speed, raycastHit.point);
         }
     }
 
@@ -130,5 +140,17 @@ public class PlayerControl : MonoBehaviour
 
         MenuOpen = false;
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if(collision.gameObject == pickUpTarget)
+        {
+            Debug.Log("picking up " + collision.gameObject.name);
+            collision.transform.position += (Vector3.down * 20);
+            Inv.CollectWeapon(collision.gameObject);
+            pickUpTarget = null;
+        }
     }
 }
