@@ -21019,6 +21019,11 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9218076648121127025, guid: 8b497f89ed2f57a4d8ed038568952912,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b497f89ed2f57a4d8ed038568952912, type: 3}
 --- !u!1001 &898850585
@@ -22207,7 +22212,6 @@ MonoBehaviour:
   speed: 10
   meleeRange: 2
   damage: 5
-  target: {fileID: 0}
   pickUpTarget: {fileID: 0}
 --- !u!114 &978466959
 MonoBehaviour:
