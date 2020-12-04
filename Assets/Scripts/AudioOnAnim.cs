@@ -1,18 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioOnAnim : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] string EventName;
+    [SerializeField] AudioData audioData;
+    internal AudioSourceController controller;
 
-    // Update is called once per frame
-    void Update()
+    public void PlayAnimationAudio()
     {
-        
+        if (controller != null)
+        {
+            if (audioData != null)
+                controller.PlayAudio(audioData, this.gameObject);
+            else
+                Debug.LogError("No audio data found on: " + this.name + " for Audio Event: " + EventName);
+        }
+        else
+        {
+            Debug.LogError("No audio controller found on: " + this.name + " for Audio Event: " + EventName);
+        }
     }
 }
