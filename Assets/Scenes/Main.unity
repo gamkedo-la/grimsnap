@@ -3524,6 +3524,8 @@ GameObject:
   - component: {fileID: 125787430}
   - component: {fileID: 125787429}
   - component: {fileID: 125787434}
+  - component: {fileID: 125787436}
+  - component: {fileID: 125787435}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -3634,6 +3636,37 @@ MonoBehaviour:
   maxHealth: 100
   health: 0
   isDead: 1
+--- !u!114 &125787435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125787428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f0a406633215745a7a531f2456beda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventName: Attack
+  audioData: {fileID: 11400000, guid: 2d1127b29dfa62e48b9a86739647cc3a, type: 2}
+--- !u!114 &125787436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125787428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46208f379371b424aa641db818179c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData: {fileID: 0}
+  sources: []
+  currentIndex: 0
+  maxSources: 5
+  position: {x: 0, y: 0, z: 0}
 --- !u!1001 &131900799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49227,6 +49260,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2146457102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146457100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46208f379371b424aa641db818179c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData: {fileID: 11400000, guid: 2d1127b29dfa62e48b9a86739647cc3a, type: 2}
+  sources: []
+  currentIndex: 0
+  maxSources: 5
+  position: {x: 0, y: 0, z: 0}
+--- !u!114 &2146457103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146457100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f0a406633215745a7a531f2456beda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EventName: Attack
+  audioData: {fileID: 11400000, guid: 2d1127b29dfa62e48b9a86739647cc3a, type: 2}
 --- !u!1001 &2555325001868139496
 PrefabInstance:
   m_ObjectHideFlags: 0
