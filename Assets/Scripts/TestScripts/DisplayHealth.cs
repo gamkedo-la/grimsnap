@@ -6,16 +6,16 @@ using UnityEngine.UI;
 public class DisplayHealth : MonoBehaviour
 {
     Health health;
-    Slider slider;
+    Image healthImage;
 
     private void Start()
     {
         health = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
-        slider = GetComponent<Slider>();
+        healthImage = GetComponent<Image>();
     }
 
     private void Update()
     {
-        slider.value = health.health / health.maxHealth;
+        healthImage.fillAmount = health.health / health.maxHealth;
     }
 }
