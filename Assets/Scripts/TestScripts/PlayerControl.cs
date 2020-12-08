@@ -144,15 +144,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if(collision.gameObject == pickUpTarget)
+        Debug.Log("hit " + collision.gameObject.name);
+        if (collision.gameObject == pickUpTarget)
         {
             Debug.Log("picking up " + collision.gameObject.name);
-            if (Inv.CollectWeapon(collision.gameObject))
-            {
-
-                collision.transform.position += (Vector3.down * 20);
-            }
+            Inv.CollectWeapon(collision.gameObject);
 
             pickUpTarget = null;
         }

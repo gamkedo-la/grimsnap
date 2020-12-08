@@ -30,6 +30,8 @@ public class InventoryManager : MonoBehaviour
     public bool CollectWeapon(GameObject weapon)
     {
         GetComponent<PlayerControl>().pickUpTarget = null;
+
+        weapon.transform.position += (Vector3.down * 20);
         return false; //InventoryMenu.GetComponent<InventoryMenu>().AddItem(weapon);
 
     }
