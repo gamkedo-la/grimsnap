@@ -21,8 +21,8 @@ MonoBehaviour:
   Loop: 0
   Volume: 0
   Pitch: 0
-  SpatialBlend: 1
-  RandomVolume: 0.42
+  SpatialBlend: 0.49
+  RandomVolume: 0.09
   RandomizeVolume: 1
   RandomPitch: 1.97
   RandomizePitch: 1

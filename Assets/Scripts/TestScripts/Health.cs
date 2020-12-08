@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GrimSnapAudio;
+using UnityEngine;
 
 public class Health : MonoBehaviour
 {
@@ -6,15 +7,27 @@ public class Health : MonoBehaviour
     public float health;
     public bool isDead = false;
 
+    [SerializeField] AudioCharacter characterAudioprofile;
+    internal IAudioActions audioAction;
+
     private void Awake()
     {
         health = maxHealth;
+
+        if (characterAudioprofile is IAudioActions)
+            audioAction = GetComponent<IAudioActions>();
     }
 
     public void TakeDamage(float damage)
     {
         Debug.Log("Taking Damage" + transform.name);
         health -= damage;
+
+        if (audioAction != null)
+            audioAction.TakeDamageAudio();
+        else
+            Debug.LogError("Character Audio Profile Null" + transform.name);
+
         if (GetComponent<EnemyController>() != null)
         {
             GetComponent<EnemyController>().WanderRadius = GetComponent<EnemyController>().WR;

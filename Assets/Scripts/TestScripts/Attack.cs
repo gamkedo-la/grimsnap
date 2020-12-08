@@ -1,10 +1,13 @@
-﻿using UnityEngine;
-
+﻿using GrimSnapAudio;
+using UnityEngine;
 public class Attack : MonoBehaviour
 {
     [SerializeField] float attackRate;
     [SerializeField] bool useAttackRate;
     [SerializeField] float nextAttackTime;
+
+    [SerializeField] AudioCharacter characterAudioProfile;
+    internal IAudioActions audioAction;
 
     void Start()
     {
@@ -12,6 +15,9 @@ public class Attack : MonoBehaviour
         { nextAttackTime = attackRate; }
         else
         { nextAttackTime = 0; }
+
+        if (characterAudioProfile is IAudioActions)
+            audioAction = GetComponent<IAudioActions>();
     }
 
     void Update()
@@ -27,6 +33,12 @@ public class Attack : MonoBehaviour
         {
             target.TakeDamage(damage);
             Debug.Log(this.gameObject.name + " is attacking!");
+
+            if (audioAction != null)
+                audioAction.AttackAudio();
+            else
+                Debug.LogWarning("Audio Attack Profile Null" + transform.name);
+
             ResetAttackTimer();
         }
     }

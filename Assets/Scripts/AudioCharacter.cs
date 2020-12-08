@@ -14,7 +14,7 @@ namespace GrimSnapAudio
     }
 
     [System.Serializable]
-    public class AudioCharacter : MonoBehaviour, AudioActions
+    public class AudioCharacter : MonoBehaviour
     {
         [SerializeField] internal AudioSourceController controller;
         public List<AudioEvent> audioEvents = new List<AudioEvent>();
@@ -24,11 +24,11 @@ namespace GrimSnapAudio
             return audioEvents[index].GetAudioData();
         }
 
-        public void AttackAudio() { }
-        public void TakeDamageAudio() { }
+        //public void AttackAudio() { }
+        //public void TakeDamageAudio() { }
     }
 
-    public interface AudioActions
+    public interface IAudioActions
     {
         void AttackAudio();
 
