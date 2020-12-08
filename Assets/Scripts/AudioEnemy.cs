@@ -4,12 +4,13 @@
     {
         public void AttackAudio()
         {
-            // throw new System.NotImplementedException();
+
         }
 
         public void TakeDamageAudio()
         {
-            //throw new System.NotImplementedException();
+            if (GetEvent(0) != null)
+                controller.PlayAudio(GetEvent(0), gameObject);
         }
     }
 }
