@@ -11,7 +11,9 @@ public class Sword : MonoBehaviour
 
     private int damageFinal;
 
+    public Vector2 InvDimensions = new Vector2(1, 3);
 
+    public Sprite InventorySprite;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +24,8 @@ public class Sword : MonoBehaviour
 
         thisWeapon.SetDamage(damageFinal);
         thisWeapon.SetRange(range);
-
+        thisWeapon.SetInvDim(InvDimensions);
+        thisWeapon.SetInvSprite(InventorySprite);
 
 
     }

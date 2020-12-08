@@ -8,6 +8,10 @@ public class EquipableWeapon : MonoBehaviour
     private float range;
     private int damage;
 
+    private Vector2 InvDimensions = new Vector2(0, 0);
+
+    private Sprite InventorySprite;
+
 
     public float GetRange()
     {
@@ -33,20 +37,31 @@ public class EquipableWeapon : MonoBehaviour
 
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-        
-    //    if(collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PlayerControl>().pickUpTarget == gameObject)
-    //    {
-            
+    public void SetInvDim(Vector2 d)
+    {
 
-    //        Debug.Log(name + " getting picked up");
-    //        collision.gameObject.GetComponent<PlayerControl>().pickUpTarget = null;
-    //        collision.gameObject.GetComponent<InventoryManager>().CollectWeapon(gameObject);
-    //        transform.position += (Vector3.down * 20);
+        InvDimensions = d;
+    }
 
-    //    }
+    public Vector2 GetInvDim()
+    {
 
-    //}
+        return InvDimensions;
+
+    }
+
+    public void SetInvSprite(Sprite S)
+    {
+        InventorySprite = S;
+
+    }
+
+
+    public Sprite GetInvSprite()
+    {
+
+        return InventorySprite;
+    }
+
 
 }

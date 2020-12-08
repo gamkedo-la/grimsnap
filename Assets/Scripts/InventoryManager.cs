@@ -27,20 +27,11 @@ public class InventoryManager : MonoBehaviour
         return questItems.Count;
     }
 
-    public void CollectWeapon(GameObject weapon)
+    public bool CollectWeapon(GameObject weapon)
     {
-        if (weaponsInInv.Count < InventorySize)
-        {
-            weaponsInInv.Add(weapon);
-            InventoryMenu.GetComponent<InventoryMenu>().AddItem(weapon);
-        }
-        else
-        {
-            Debug.Log("Inventory is full");
-
-        }
-
         GetComponent<PlayerControl>().pickUpTarget = null;
+        return false; //InventoryMenu.GetComponent<InventoryMenu>().AddItem(weapon);
+
     }
 
     public void DropWeapon(GameObject weapon)
