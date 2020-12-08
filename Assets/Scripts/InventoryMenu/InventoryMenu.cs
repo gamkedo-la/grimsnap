@@ -1,19 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryMenu : MonoBehaviour
 {
-
-    public List<GameObject> InvSlots = new List<GameObject>();
-
-    public List<GameObject> OpenInvSlots = new List<GameObject>();
+    public List<InventoryGridNode> OpenNodes = new List<InventoryGridNode>();
+    public List<InventoryGridNode> ToCheck = new List<InventoryGridNode>();
 
     public List<GameObject> PL = new List<GameObject>();
 
     public Vector2 temp;
-
-    public GameObject Grid;
 
     public GameObject InvSpritePrefab;
 
@@ -24,19 +21,16 @@ public class InventoryMenu : MonoBehaviour
     private PlayerControl Player;
     private InventoryManager PlayerInv;
 
+    InventoryGridGen Grid;
+
     // Start is called before the first frame update
     void Start()
     {
         current = 0;
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         PlayerInv = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryManager>();
+        Grid = GetComponent<InventoryGridGen>();
 
-        foreach (Transform g in Grid.transform)
-        {
-            InvSlots.Add(g.gameObject);
-            OpenInvSlots.Add(g.gameObject);
-
-        }
     }
 
     // Update is called once per frame
@@ -64,87 +58,75 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
-    public void AddItem(GameObject item)
+    public bool AddItem(GameObject item)
     {
         temp = item.GetComponent<EquipableWeapon>().GetInvDim();
 
+        foreach(InventoryGridNode Node in Grid.AllTiles)
+        {
+            if(Node.Contents == null && Node.Row <= Grid.Rows - temp.y && Node.Column <= Grid.Columns - temp.x)
+            {
+
+                for(int c = 0; c< temp.x; c++)
+                {
+                    for (int r = 0; r<temp.y; r++)
+                    {
+                        ToCheck.Add(Grid.NodeAtCR(Node.Column + c, Node.Row + r));
+
+                    }
+                                       
+                }
+            }
+
+            bool OpenSpot = false;
+            foreach(InventoryGridNode inventoryGridNode in ToCheck)
+            {
+                OpenSpot = CheckNode(inventoryGridNode);
+
+            }
+            if(OpenSpot == true)
+            {
+                Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform);
+
+                foreach (InventoryGridNode inventoryGridNode in ToCheck)
+                {
+                    inventoryGridNode.Contents = item;
+
+                }
+                return true;
+            }
+            if(OpenSpot == false)
+            {
+
+                ToCheck.Clear();
+            }
+        }
+        return false;
+    }
+
+
+    bool CheckNode(InventoryGridNode inventoryGridNode)
+    {
+
+        if(inventoryGridNode.Contents == null)
+        {
+
+            return true;
+        }
+
+        else
+        {
+
+            return false;
+        }
     }
 
     public void DropItem(int slot)
     {
 
-        PlayerInv.DropWeapon(InvSlots[slot].GetComponent<InvSlotMenu>().WeaponRef);
-
-        InvSlots[slot].GetComponent<InvSlotMenu>().Populate(null, current);
-
-        for (int c = current; c < PlayerInv.GetCountOfWeapons(); c++)
-        {
-            InvSlots[c].GetComponent<InvSlotMenu>().Populate(InvSlots[c + 1].GetComponent<InvSlotMenu>().WeaponRef, current);
-        }
-
-
-
-        current = PlayerInv.GetCountOfWeapons();
-
-        InvSlots[current].GetComponent<InvSlotMenu>().Populate(null, current);
 
     }
 
-    private void CheckHoriz()
-    {
-
-        if (temp.x == 1)
-        {
-            foreach (GameObject n in OpenInvSlots)
-            {
-                PL.Add(n);
-
-
-            }
-
-        }
-        else
-        {
-
-
-            foreach (GameObject n in OpenInvSlots)
-            {
-                GameObject T = n;
-                for (int i = 1; i< temp.x; i++)
-                {
-
-                    if (CheckR(T))
-                    {
-                        T = T.GetComponent<InventoryGridNode>().right;
-
-                    }
-                    if(CheckR(T) == false)
-                    {
-                        break;
-                    }
-
-                }
-                PL.Add(n);
-
-            }
-        }
-
-    }
-
-    private bool CheckR(GameObject node)
-    {
-
-        if (OpenInvSlots.Contains(node.GetComponent<InventoryGridNode>().right))
-        {
-            return true;
-
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-
+   
 
 }

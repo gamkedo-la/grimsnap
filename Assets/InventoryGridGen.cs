@@ -13,6 +13,8 @@ public class InventoryGridGen : MonoBehaviour
     public int tileWidth =50;
     public int tileHeight = 50;
 
+    public List<InventoryGridNode> AllTiles = new List<InventoryGridNode>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,21 +22,56 @@ public class InventoryGridGen : MonoBehaviour
         float allHeight = tileHeight * Rows;
         RectTransform rt = GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(allWidth, allHeight);
-        for(int r = 0; r< Rows; r++)
+        for(int r = 1; r <= Rows; r++)
         {
-            for(int c = 0; c<Columns; c++)
+            for(int c = 1; c <= Columns; c++)
             {
 
                 GameObject tempGO = GameObject.Instantiate(tilePrefab, transform);
                 tempGO.name = c + "," + r;
                 RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
-                rtTemp.localPosition = new Vector2(tileWidth * c - allWidth/2, tileHeight * r - allHeight/2);
+                rtTemp.localPosition = new Vector2(tileWidth * (c -1) - allWidth/2, tileHeight * (r-1) - allHeight/2);
+                InventoryGridNode IGNScript = tempGO.GetComponent<InventoryGridNode>();
+                IGNScript.Column = c;
+                IGNScript.Row = r;
+                AllTiles.Add(IGNScript);
+
+                if(c > 1)
+                {
+
+                    InventoryGridNode leftOfMe = NodeAtCR(c - 1, r);
+                    leftOfMe.right = IGNScript;
+
+                }
+                if (r > 1)
+                {
+
+                    IGNScript.down = NodeAtCR(c, r - 1);
+
+                }
 
             }
 
 
         }
 
+    }
+
+    public InventoryGridNode NodeAtCR(int atC, int atR)
+    {
+
+        foreach(InventoryGridNode IGNScript in AllTiles)
+        {
+
+            if(IGNScript.Column == atC && IGNScript.Row == atR)
+            {
+
+                return IGNScript;
+            }
+
+        }
+        Debug.Log("error, invalid C,R requested");
+        return null;
     }
 
     // Update is called once per frame

@@ -10,8 +10,8 @@ public class InventoryGridNode : MonoBehaviour
     public int Row;
 
 
-    public GameObject right;
-    public GameObject down;
+    public InventoryGridNode right;
+    public InventoryGridNode down;
 
     // Start is called before the first frame update
     void Start()

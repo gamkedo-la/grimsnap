@@ -148,7 +148,11 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject == pickUpTarget)
         {
             Debug.Log("picking up " + collision.gameObject.name);
-            Inv.CollectWeapon(collision.gameObject);
+            if (Inv.CollectWeapon(collision.gameObject))
+            {
+
+                collision.transform.position += (Vector3.down * 20);
+            }
 
             pickUpTarget = null;
         }

@@ -10,7 +10,7 @@ public class EquipableWeapon : MonoBehaviour
 
     private Vector2 InvDimensions = new Vector2(0, 0);
 
-    private Sprite InventorySprite;
+    public GameObject InventorySprite;
 
 
     public float GetRange()
@@ -50,18 +50,7 @@ public class EquipableWeapon : MonoBehaviour
 
     }
 
-    public void SetInvSprite(Sprite S)
-    {
-        InventorySprite = S;
 
-    }
-
-
-    public Sprite GetInvSprite()
-    {
-
-        return InventorySprite;
-    }
 
 
 }
