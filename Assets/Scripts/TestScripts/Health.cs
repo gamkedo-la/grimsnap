@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Health : MonoBehaviour
 {
@@ -17,15 +15,25 @@ public class Health : MonoBehaviour
     {
         Debug.Log("Taking Damage" + transform.name);
         health -= damage;
-        if(GetComponent<EnemyController>() != null)
+        if (GetComponent<EnemyController>() != null)
         {
             GetComponent<EnemyController>().WanderRadius = GetComponent<EnemyController>().WR;
 
+        }
+
+        if (gameObject.tag == "Enemy" && health <= 0)
+        {
+            Kill();
         }
     }
 
     public float GetHealth()
     {
         return health;
+    }
+
+    private void Kill()
+    {
+        Destroy(this.gameObject);
     }
 }
