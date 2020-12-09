@@ -71,7 +71,7 @@ public class InventoryMenu : MonoBehaviour
                 {
                     for (int r = 0; r<temp.y; r++)
                     {
-                        ToCheck.Add(Grid.NodeAtCR(Node.Column + c, Node.Row + r));
+                        ToCheck.Add(Grid.NodeAtCR(Node.Column + c, Node.Row - r));
 
                     }
                                        
@@ -86,7 +86,7 @@ public class InventoryMenu : MonoBehaviour
             }
             if(OpenSpot == true)
             {
-                Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform);
+                Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform.position, Quaternion.identity, transform);
 
                 foreach (InventoryGridNode inventoryGridNode in ToCheck)
                 {
@@ -107,7 +107,10 @@ public class InventoryMenu : MonoBehaviour
 
     bool CheckNode(InventoryGridNode inventoryGridNode)
     {
-
+        if(inventoryGridNode == null)
+        {
+            return false;
+        }
         if(inventoryGridNode.Contents == null)
         {
 
