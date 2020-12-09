@@ -87,7 +87,8 @@ public class InventoryMenu : MonoBehaviour
             }
             if(OpenSpot == true)
             {
-                Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform.position, Quaternion.identity, transform);
+                GameObject INVOBJ = Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform.position, Quaternion.identity, transform);
+                INVOBJ.GetComponent<InventoryObject>().RealObject = item;
 
                 foreach (InventoryGridNode inventoryGridNode in ToCheck)
                 {
