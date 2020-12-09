@@ -61,17 +61,18 @@ public class InventoryMenu : MonoBehaviour
     public bool AddItem(GameObject item)
     {
         temp = item.GetComponent<EquipableWeapon>().GetInvDim();
+        ToCheck.Clear();
 
         foreach(InventoryGridNode Node in Grid.AllTiles)
         {
-            if(Node.Contents == null && Node.Row <= Grid.Rows - temp.y && Node.Column <= Grid.Columns - temp.x)
+            if(Node.Contents == null && Node.Row <= Grid.Rows - (temp.y-1) && Node.Column <= Grid.Columns - (temp.x-1))
             {
 
                 for(int c = 0; c< temp.x; c++)
                 {
                     for (int r = 0; r<temp.y; r++)
                     {
-                        ToCheck.Add(Grid.NodeAtCR(Node.Column + c, Node.Row - r));
+                        ToCheck.Add(Grid.NodeAtCR(Node.Column + c, Node.Row + r));
 
                     }
                                        
@@ -93,11 +94,13 @@ public class InventoryMenu : MonoBehaviour
                     inventoryGridNode.Contents = item;
 
                 }
+                Debug.Log("item picked up successfuly");
                 return true;
+
             }
             if(OpenSpot == false)
             {
-
+                Debug.Log("checked " + Node.Column + "," + Node.Row + ", does not fit here");
                 ToCheck.Clear();
             }
         }

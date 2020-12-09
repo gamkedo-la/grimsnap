@@ -31,7 +31,7 @@ public class InventoryManager : MonoBehaviour
     {
         GetComponent<PlayerControl>().pickUpTarget = null;
 
-
+        Debug.Log("adding to inventory");
         
         return InventoryMenu.GetComponent<InventoryMenu>().AddItem(weapon);
 
