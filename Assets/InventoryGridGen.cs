@@ -30,7 +30,7 @@ public class InventoryGridGen : MonoBehaviour
                 GameObject tempGO = GameObject.Instantiate(tilePrefab, transform);
                 tempGO.name = c + "," + r;
                 RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
-                rtTemp.localPosition = new Vector2(tileWidth * (c -1) - allWidth/2, allHeight / 2 - (tileHeight * (r - 1)) );
+                rtTemp.localPosition = new Vector2((tileWidth * (c -1) - allWidth/2), (allHeight / 2 - (tileHeight * (r - 1))) );
                 InventoryGridNode IGNScript = tempGO.GetComponent<InventoryGridNode>();
                 IGNScript.Column = c;
                 IGNScript.Row = r;

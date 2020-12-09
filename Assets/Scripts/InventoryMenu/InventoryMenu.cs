@@ -12,8 +12,6 @@ public class InventoryMenu : MonoBehaviour
 
     public Vector2 temp;
 
-    public GameObject InvSpritePrefab;
-
     int current;
 
     bool Active = false;
@@ -22,6 +20,8 @@ public class InventoryMenu : MonoBehaviour
     private InventoryManager PlayerInv;
 
     InventoryGridGen Grid;
+
+    public InventoryObject selected;
 
     // Start is called before the first frame update
     void Start()
@@ -87,15 +87,21 @@ public class InventoryMenu : MonoBehaviour
             }
             if(OpenSpot == true)
             {
+
+
                 GameObject INVOBJ = Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform.position, Quaternion.identity, transform);
                 INVOBJ.GetComponent<InventoryObject>().RealObject = item;
+                
 
                 foreach (InventoryGridNode inventoryGridNode in ToCheck)
                 {
                     inventoryGridNode.Contents = item;
+                    INVOBJ.GetComponent<InventoryObject>().Location.Add(inventoryGridNode);
+                    INVOBJ.GetComponent<InventoryObject>().menu = this;
 
                 }
                 Debug.Log("item picked up successfuly");
+                //ToCheck.Clear();
                 return true;
 
             }
