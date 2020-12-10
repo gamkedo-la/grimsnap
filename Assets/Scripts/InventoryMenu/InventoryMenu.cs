@@ -23,6 +23,8 @@ public class InventoryMenu : MonoBehaviour
 
     public InventoryObject selected;
 
+    public List<GameObject> UIElements = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {

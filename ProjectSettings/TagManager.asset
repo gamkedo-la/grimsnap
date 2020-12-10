@@ -8,6 +8,10 @@ TagManager:
   - Ground
   - Obstacle
   - Equipment
+  - InventoryGrid
+  - EquipmentSlot
+  - InventoryEquipment
+  - UI
   layers:
   - Default
   - TransparentFX
