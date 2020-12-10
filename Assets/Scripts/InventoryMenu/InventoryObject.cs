@@ -11,6 +11,10 @@ public class InventoryObject : MonoBehaviour
 
     public bool selected = false;
 
+    Vector3 Offset;
+
+    public Vector2 dimensions;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,7 @@ public class InventoryObject : MonoBehaviour
         if (selected == true)
         {
 
-            transform.position = Input.mousePosition;
+            transform.position = Input.mousePosition - Offset;
         }
         
     }
@@ -38,6 +42,7 @@ public class InventoryObject : MonoBehaviour
 
             selected = true;
             menu.selected = this;
+            Offset = Input.mousePosition - transform.position;
         }
         else if (selected == true  && menu.selected == this)
         {
