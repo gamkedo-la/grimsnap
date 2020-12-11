@@ -35,6 +35,7 @@ public class InventoryGridGen : MonoBehaviour
                 IGNScript.Column = c;
                 IGNScript.Row = r;
                 AllTiles.Add(IGNScript);
+                GetComponent<InventoryMenu>().UIElements.Add(tempGO);
 
             }
 
