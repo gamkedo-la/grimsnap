@@ -26,6 +26,8 @@ public class InventoryObject : MonoBehaviour
 
     public GameObject Holder;
 
+    public EquipmentType ThisEquipment;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,6 +106,37 @@ public class InventoryObject : MonoBehaviour
                 Destroy(Coll);
                 Destroy(gameObject);
                 return;
+
+            }
+
+            foreach (GameObject O in Overlap)
+            {
+                if(O.tag == "EquipmentSlot" && O.GetComponent<EquipmentSlot>().thisSlot == ThisEquipment)
+                {
+
+                    Last = O;
+                    selected = false;
+                    menu.selected = null;
+
+                    survey.Clear();
+
+
+                    foreach (InventoryGridNode G in Location)
+                    {
+                        G.Contents = null;
+
+                    }
+                    Location.Clear();
+                    
+
+                    if (dimensions.x == 1)
+                    {
+                        Vector3 temp = O.GetComponent<RectTransform>().localPosition;
+                        temp.x += 25;
+                        GetComponent<RectTransform>().localPosition = temp;
+                    }
+                    return;
+                }
 
             }
 
@@ -194,18 +227,30 @@ public class InventoryObject : MonoBehaviour
                 menu.selected = null;
                 transform.position = Last.transform.position;
                 survey.Clear();
-                for (int r = 0; r < dimensions.y; r++)
+
+                if (Last.tag != "EquipmentSlot")
                 {
-                    for (int c = 0; c < dimensions.x; c++)
+                    for (int r = 0; r < dimensions.y; r++)
                     {
-                        Location.Add(menu.Grid.NodeAtCR(Last.GetComponent<InventoryGridNode>().Column + c, Last.GetComponent<InventoryGridNode>().Row + r));
+                        for (int c = 0; c < dimensions.x; c++)
+                        {
+                            Location.Add(menu.Grid.NodeAtCR(Last.GetComponent<InventoryGridNode>().Column + c, Last.GetComponent<InventoryGridNode>().Row + r));
+                        }
+                    }
+                    foreach (InventoryGridNode G in Location)
+                    {
+
+                        G.Contents = gameObject;
                     }
                 }
-                foreach (InventoryGridNode G in Location)
-                {
 
-                    G.Contents = gameObject;
+                if(Last.tag == "EquipmentSlot" && dimensions.x == 1)
+                {
+                    Vector3 temp = Last.GetComponent<RectTransform>().localPosition;
+                    temp.x += 25;
+                    GetComponent<RectTransform>().localPosition = temp;
                 }
+
                 return;
             }
         }

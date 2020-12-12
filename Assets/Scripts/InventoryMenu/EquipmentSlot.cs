@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EquipmentType { weapon}
+
 public class EquipmentSlot : MonoBehaviour
 {
+    public EquipmentType thisSlot;
+
     // Start is called before the first frame update
     void Start()
     {
