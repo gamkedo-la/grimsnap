@@ -24,6 +24,8 @@ public class InventoryObject : MonoBehaviour
 
     public GameObject Last;
 
+    public GameObject Holder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,7 @@ public class InventoryObject : MonoBehaviour
         {
 
             transform.position = Input.mousePosition - Offset;
+            
         }
         
     }
@@ -76,7 +79,7 @@ public class InventoryObject : MonoBehaviour
         //Debug.Log("clicked " + RealObject.name + " in inventory");
         if (selected == false && menu.selected == null)
         {
-
+            transform.parent = menu.transform;
             selected = true;
             menu.selected = this;
             Offset = Input.mousePosition - transform.position;
@@ -177,7 +180,7 @@ public class InventoryObject : MonoBehaviour
 
                     G.Contents = gameObject;
                 }
-
+                transform.parent = Holder.transform;
                 Last = closest;
                 selected = false;
                 menu.selected = null;
@@ -186,6 +189,7 @@ public class InventoryObject : MonoBehaviour
             else
             {
                 Debug.Log("does not fit");
+                transform.parent = Holder.transform;
                 selected = false;
                 menu.selected = null;
                 transform.position = Last.transform.position;

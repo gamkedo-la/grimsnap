@@ -15,6 +15,8 @@ public class InventoryGridGen : MonoBehaviour
 
     public List<InventoryGridNode> AllTiles = new List<InventoryGridNode>();
 
+    public Transform Holder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,7 @@ public class InventoryGridGen : MonoBehaviour
             for(int c = 1; c <= Columns; c++)
             {
 
-                GameObject tempGO = GameObject.Instantiate(tilePrefab, transform);
+                GameObject tempGO = GameObject.Instantiate(tilePrefab, Holder);
                 tempGO.name = c + "," + r;
                 RectTransform rtTemp = tempGO.GetComponent<RectTransform>();
                 rtTemp.localPosition = new Vector2((tileWidth * (c -1) - allWidth/2), (allHeight / 2 - (tileHeight * (r - 1))) );

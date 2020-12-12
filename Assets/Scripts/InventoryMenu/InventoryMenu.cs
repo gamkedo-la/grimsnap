@@ -25,6 +25,8 @@ public class InventoryMenu : MonoBehaviour
 
     public List<GameObject> UIElements = new List<GameObject>();
 
+    public GameObject Holder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +97,7 @@ public class InventoryMenu : MonoBehaviour
                 INVOBJ.GetComponent<InventoryObject>().RealObject = item;
                 INVOBJ.GetComponent<InventoryObject>().dimensions = item.GetComponent<EquipableWeapon>().GetInvDim();
                 INVOBJ.GetComponent<InventoryObject>().Last = Node.gameObject;
+                INVOBJ.GetComponent<InventoryObject>().Holder = Holder;
 
 
                 foreach (InventoryGridNode inventoryGridNode in ToCheck)
