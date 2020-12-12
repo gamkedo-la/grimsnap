@@ -94,6 +94,7 @@ MonoBehaviour:
   selected: 0
   dimensions: {x: 0, y: 0}
   Overlap: []
+  Coll: {fileID: 7587829029115262931, guid: 9e29833c5f58743418f05a8453d6b6d4, type: 3}
 --- !u!114 &-3233060892316978321
 MonoBehaviour:
   m_ObjectHideFlags: 0

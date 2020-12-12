@@ -19,7 +19,7 @@ public class InventoryMenu : MonoBehaviour
     private PlayerControl Player;
     private InventoryManager PlayerInv;
 
-    InventoryGridGen Grid;
+    public InventoryGridGen Grid;
 
     public InventoryObject selected;
 

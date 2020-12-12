@@ -53,6 +53,7 @@ MonoBehaviour:
   Contents: {fileID: 0}
   Column: 1
   Row: 1
+  Coll: {fileID: 7587829029115262931, guid: 9e29833c5f58743418f05a8453d6b6d4, type: 3}
 --- !u!222 &1624281463709835357
 CanvasRenderer:
   m_ObjectHideFlags: 0
