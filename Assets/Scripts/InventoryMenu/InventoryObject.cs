@@ -96,6 +96,7 @@ public class InventoryObject : MonoBehaviour
             if(Last.tag == "EquipmentSlot")
             {
                 Unequip();
+                Last.GetComponent<EquipmentSlot>().Contents = null;
             }
         }
         else if (selected == true && menu.selected == this)
@@ -117,7 +118,9 @@ public class InventoryObject : MonoBehaviour
 
             foreach (GameObject O in Overlap)
             {
-                if(O.tag == "EquipmentSlot" && O.GetComponent<EquipmentSlot>().thisSlot == ThisEquipment)
+                if(O.tag == "EquipmentSlot" && 
+                    O.GetComponent<EquipmentSlot>().thisSlot == ThisEquipment && 
+                    O.GetComponent<EquipmentSlot>().Contents == null)
                 {
 
                     Last = O;
@@ -141,6 +144,7 @@ public class InventoryObject : MonoBehaviour
                         temp.x += 25;
                         GetComponent<RectTransform>().localPosition = temp;
                     }
+                    Last.GetComponent<EquipmentSlot>().Contents = RealObject;
                     Equip();
                     return;
                 }
@@ -259,7 +263,7 @@ public class InventoryObject : MonoBehaviour
                         temp.x += 25;
                         GetComponent<RectTransform>().localPosition = temp;
                     }
-
+                    Last.GetComponent<EquipmentSlot>().Contents = RealObject;
                     Equip();
                 }
 

@@ -8,6 +8,8 @@ public class EquipmentSlot : MonoBehaviour
 {
     public EquipmentType thisSlot;
 
+    public GameObject Contents = null;
+
     // Start is called before the first frame update
     void Start()
     {
