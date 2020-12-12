@@ -16,10 +16,13 @@ public class InventoryObject : MonoBehaviour
     public Vector2 dimensions;
 
     public List<GameObject> Overlap = new List<GameObject>();
+    public List<InventoryGridNode> survey = new List<InventoryGridNode>();
 
     public GameObject Coll;
     Vector3 ColPos = new Vector3(0, 1000, 0);
+    public GameObject closest = null;
 
+    public GameObject Last;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +58,21 @@ public class InventoryObject : MonoBehaviour
 
     public void ItemClicked()
     {
+
+        float minDist = Mathf.Infinity;
+
+        foreach (GameObject O in Overlap)
+        {
+            float dist = Vector3.Distance(transform.position, O.transform.position);
+            if (dist < minDist)
+            {
+                closest = O;
+                minDist = dist;
+            }
+
+        }
+
+
         //Debug.Log("clicked " + RealObject.name + " in inventory");
         if (selected == false && menu.selected == null)
         {
@@ -62,7 +80,12 @@ public class InventoryObject : MonoBehaviour
             selected = true;
             menu.selected = this;
             Offset = Input.mousePosition - transform.position;
-            Overlap.Clear();
+            foreach (InventoryGridNode G in Location)
+            {
+                G.Contents = null;
+
+            }
+            Location.Clear();
         }
         else if (selected == true && menu.selected == this)
         {
@@ -81,8 +104,9 @@ public class InventoryObject : MonoBehaviour
 
             }
 
-            float minDist = Mathf.Infinity;
-            GameObject closest = null;
+
+            minDist = Mathf.Infinity;
+
             foreach (GameObject O in Overlap)
             {
                 float dist = Vector3.Distance(transform.position, O.transform.position);
@@ -93,36 +117,45 @@ public class InventoryObject : MonoBehaviour
                 }
 
             }
-            transform.position = closest.transform.position;
-
-            List<InventoryGridNode> survey = new List<InventoryGridNode>();
+            
 
             for (int r = 0; r < dimensions.y; r++)
             {
                 for (int c = 0; c < dimensions.x; c++)
                 {
-                    survey.Add(menu.Grid.NodeAtCR(closest.GetComponent<InventoryGridNode>().Column + c, closest.GetComponent<InventoryGridNode>().Row + r));
+                    if (closest.GetComponent<InventoryGridNode>() != null)
+                    {
+                        survey.Add(menu.Grid.NodeAtCR(closest.GetComponent<InventoryGridNode>().Column + c, closest.GetComponent<InventoryGridNode>().Row + r));
+                    }
+
                 }
             }
 
             bool openSpot = true;
-
-            foreach(InventoryGridNode I in survey)
+            if (survey.Count == 0)
             {
 
-                if(I.Contents != null)
+                openSpot = false;
+
+            }
+            else
+            {
+                foreach (InventoryGridNode I in survey)
                 {
-                    if (I.Contents != gameObject)
+
+                    if (I.Contents != null)
                     {
+
                         openSpot = false;
+
                     }
                 }
             }
 
             if (openSpot == true)
             {
-
-
+                survey.Clear();
+                transform.position = closest.transform.position;
 
                 foreach (InventoryGridNode G in Location)
                 {
@@ -145,6 +178,7 @@ public class InventoryObject : MonoBehaviour
                     G.Contents = gameObject;
                 }
 
+                Last = closest;
                 selected = false;
                 menu.selected = null;
 
@@ -152,6 +186,23 @@ public class InventoryObject : MonoBehaviour
             else
             {
                 Debug.Log("does not fit");
+                selected = false;
+                menu.selected = null;
+                transform.position = Last.transform.position;
+                survey.Clear();
+                for (int r = 0; r < dimensions.y; r++)
+                {
+                    for (int c = 0; c < dimensions.x; c++)
+                    {
+                        Location.Add(menu.Grid.NodeAtCR(Last.GetComponent<InventoryGridNode>().Column + c, Last.GetComponent<InventoryGridNode>().Row + r));
+                    }
+                }
+                foreach (InventoryGridNode G in Location)
+                {
+
+                    G.Contents = gameObject;
+                }
+                return;
             }
         }
     }
