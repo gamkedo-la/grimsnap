@@ -137,9 +137,9 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
-    public void DropItem(int slot)
+    public void DropItem(GameObject item)
     {
-
+        PlayerInv.DropWeapon(item);
 
     }
 

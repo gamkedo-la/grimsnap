@@ -61,15 +61,6 @@ public class InvSlotMenu : MonoBehaviour
 
     }
 
-    public void Drop()
-    {
 
-
-        if (WeaponRef != null)
-        {
-            IM.DropItem(SL);
-        }
-
-    }
 
 }

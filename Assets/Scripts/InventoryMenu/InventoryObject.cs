@@ -28,10 +28,16 @@ public class InventoryObject : MonoBehaviour
         ColPos.x = GetComponent<RectTransform>().position.x;
         ColPos.z = GetComponent<RectTransform>().position.y;
         GameObject C = Instantiate(Coll, ColPos, Quaternion.identity, menu.transform);
+
         C.name = (RealObject.name + " inventory collider");
         Coll = C;
-        Coll.tag = gameObject.tag;
         Coll.GetComponent<InventoryCollider>().rep = gameObject;
+        Coll.tag = gameObject.tag;
+        Vector3 ts = Coll.transform.localScale;
+        ts.z *= GetComponent<InventoryObject>().dimensions.y;
+        ts.x *= GetComponent<InventoryObject>().dimensions.x;
+        Coll.transform.localScale = ts;
+
 
     }
 
@@ -49,7 +55,7 @@ public class InventoryObject : MonoBehaviour
 
     public void ItemClicked()
     {
-        Debug.Log("clicked " + RealObject.name + " in inventory");
+        //Debug.Log("clicked " + RealObject.name + " in inventory");
         if (selected == false && menu.selected == null)
         {
 
@@ -60,7 +66,20 @@ public class InventoryObject : MonoBehaviour
         }
         else if (selected == true && menu.selected == this)
         {
+            if(Overlap.Count == 0)
+            {
+                Debug.Log("dropping " + RealObject.name);
+                menu.DropItem(RealObject);
+                foreach (InventoryGridNode G in Location)
+                {
 
+                    G.Contents = gameObject;
+                }
+                Destroy(Coll);
+                Destroy(gameObject);
+                return;
+
+            }
 
             float minDist = Mathf.Infinity;
             GameObject closest = null;
@@ -93,13 +112,16 @@ public class InventoryObject : MonoBehaviour
 
                 if(I.Contents != null)
                 {
-                    openSpot = false;
+                    if (I.Contents != gameObject)
+                    {
+                        openSpot = false;
+                    }
                 }
             }
 
             if (openSpot == true)
             {
-                
+
 
 
                 foreach (InventoryGridNode G in Location)
@@ -125,6 +147,11 @@ public class InventoryObject : MonoBehaviour
 
                 selected = false;
                 menu.selected = null;
+
+            }
+            else
+            {
+                Debug.Log("does not fit");
             }
         }
     }

@@ -11,10 +11,7 @@ public class InventoryCollider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 ts = transform.localScale;
-        ts.z *= rep.GetComponent<InventoryObject>().dimensions.y;
-        ts.x *= rep.GetComponent<InventoryObject>().dimensions.x;
-        transform.localScale = ts;
+
     }
 
     // Update is called once per frame
