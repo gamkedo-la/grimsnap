@@ -5,6 +5,8 @@ using Movement;
 using UnityEditor;
 using UnityEngine.AI;
 using MyMath;
+using UnityEngine.UI;
+using TMPro;
 
 //Processes data and issues commands, nothing else
 public class PlayerControl : MonoBehaviour
@@ -25,6 +27,9 @@ public class PlayerControl : MonoBehaviour
     RaycastHit raycastHit;
     RaycastHit click;
     Health target;
+    public TextMeshProUGUI targetNameText;
+    public Image targetHealthImage;
+    public Image targetHealthImageFill;
 
     public GameObject pickUpTarget;
 
@@ -83,6 +88,7 @@ public class PlayerControl : MonoBehaviour
             target = click.transform.GetComponent<Health>();
             FollowTarget();
             //Debug.Log("following " + target.name);
+            ShowTargetHealth();
             return;
         }
         if (click.transform.tag == "Equipment")
@@ -91,7 +97,12 @@ public class PlayerControl : MonoBehaviour
             pickUpTarget = click.transform.gameObject;
 
         }
-        MoveToTerrain();
+        if (click.transform.tag != "Enemy")
+        {
+            HideTargetHealth();
+        }
+
+            MoveToTerrain();
     }
 
     private void FollowTarget()
@@ -111,6 +122,32 @@ public class PlayerControl : MonoBehaviour
                 attack.AttackTarget(target, damage);
             }
         }
+    }
+
+    private void ShowTargetHealth()
+    {
+        if (target != null)
+        {
+            if (target.health <= 0) 
+            { 
+                HideTargetHealth(); 
+            }
+            else
+            {
+                targetNameText.enabled = true;
+                targetHealthImage.enabled = true;
+                targetHealthImageFill.enabled = true;
+                targetNameText.text = target.name;
+                targetHealthImageFill.fillAmount = target.health / target.maxHealth;
+            }
+        }
+    }
+
+    private void HideTargetHealth()
+    {
+        targetNameText.enabled = false;
+        targetHealthImage.enabled = false;
+        targetHealthImageFill.enabled = false;
     }
 
     private void MoveToTerrain()
