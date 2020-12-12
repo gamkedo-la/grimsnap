@@ -5,12 +5,15 @@ using UnityEngine;
 public class EquipableWeapon : MonoBehaviour
 {
 
-    private float range;
-    private int damage;
+    private float range = 0;
+    private int damage = 0;
+    private float armor = 0;
 
     private Vector2 InvDimensions = new Vector2(0, 0);
 
     public GameObject InventorySprite;
+
+    public bool isEquiped = false;
 
 
     public float GetRange()
@@ -34,6 +37,18 @@ public class EquipableWeapon : MonoBehaviour
     public void SetDamage(int D)
     {
         damage = D;
+
+    }
+
+    public void SetArmor(float A)
+    {
+        armor = A;
+
+    }
+
+    public float GetArmor()
+    {
+        return armor;
 
     }
 

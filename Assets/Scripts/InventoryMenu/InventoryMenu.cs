@@ -7,6 +7,11 @@ public class InventoryMenu : MonoBehaviour
 {
     public List<InventoryGridNode> OpenNodes = new List<InventoryGridNode>();
     public List<InventoryGridNode> ToCheck = new List<InventoryGridNode>();
+    public List<GameObject> EquipedItems = new List<GameObject>();
+
+    public float damage = 0;
+    public float range = 0;
+    public float armor = 0;
 
     public List<GameObject> PL = new List<GameObject>();
 
@@ -26,6 +31,8 @@ public class InventoryMenu : MonoBehaviour
     public List<GameObject> UIElements = new List<GameObject>();
 
     public GameObject Holder;
+
+    public GameObject WeaponHand;
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +105,11 @@ public class InventoryMenu : MonoBehaviour
                 INVOBJ.GetComponent<InventoryObject>().dimensions = item.GetComponent<EquipableWeapon>().GetInvDim();
                 INVOBJ.GetComponent<InventoryObject>().Last = Node.gameObject;
                 INVOBJ.GetComponent<InventoryObject>().Holder = Holder;
+                if(INVOBJ.GetComponent<InventoryObject>().ThisEquipment == EquipmentType.weapon)
+                {
+
+                    INVOBJ.GetComponent<InventoryObject>().WorldSlot = WeaponHand;
+                }
 
 
                 foreach (InventoryGridNode inventoryGridNode in ToCheck)
@@ -144,6 +156,22 @@ public class InventoryMenu : MonoBehaviour
     public void DropItem(GameObject item)
     {
         PlayerInv.DropWeapon(item);
+
+    }
+
+    public void UpdateGearScore()
+    {
+        damage = 0;
+        range = 0;
+        armor = 0;
+        foreach(GameObject E in EquipedItems)
+        {
+            damage += E.GetComponent<EquipableWeapon>().GetDamage();
+            range += E.GetComponent<EquipableWeapon>().GetRange();
+            armor += E.GetComponent<EquipableWeapon>().GetArmor();
+
+        }
+        Player.UpdateGearScore(range, damage, armor);
 
     }
 

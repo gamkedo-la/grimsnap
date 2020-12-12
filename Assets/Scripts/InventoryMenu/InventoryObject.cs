@@ -28,6 +28,8 @@ public class InventoryObject : MonoBehaviour
 
     public EquipmentType ThisEquipment;
 
+    public GameObject WorldSlot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +93,10 @@ public class InventoryObject : MonoBehaviour
 
             }
             Location.Clear();
+            if(Last.tag == "EquipmentSlot")
+            {
+                Unequip();
+            }
         }
         else if (selected == true && menu.selected == this)
         {
@@ -135,6 +141,7 @@ public class InventoryObject : MonoBehaviour
                         temp.x += 25;
                         GetComponent<RectTransform>().localPosition = temp;
                     }
+                    Equip();
                     return;
                 }
 
@@ -244,11 +251,16 @@ public class InventoryObject : MonoBehaviour
                     }
                 }
 
-                if(Last.tag == "EquipmentSlot" && dimensions.x == 1)
+                if (Last.tag == "EquipmentSlot")
                 {
-                    Vector3 temp = Last.GetComponent<RectTransform>().localPosition;
-                    temp.x += 25;
-                    GetComponent<RectTransform>().localPosition = temp;
+                    if (dimensions.x == 1)
+                    {
+                        Vector3 temp = Last.GetComponent<RectTransform>().localPosition;
+                        temp.x += 25;
+                        GetComponent<RectTransform>().localPosition = temp;
+                    }
+
+                    Equip();
                 }
 
                 return;
@@ -266,6 +278,30 @@ public class InventoryObject : MonoBehaviour
     {
 
         Overlap.Remove(c);
+
+    }
+
+    public void Equip()
+    {
+
+        RealObject.GetComponent<EquipableWeapon>().isEquiped = true;
+        RealObject.GetComponent<SphereCollider>().enabled = false;
+        RealObject.transform.position = WorldSlot.transform.position;
+        RealObject.transform.rotation = WorldSlot.transform.rotation;
+        RealObject.transform.parent = WorldSlot.transform;
+        menu.EquipedItems.Add(RealObject);
+        menu.UpdateGearScore();
+
+    }
+
+    public void Unequip()
+    {
+        RealObject.GetComponent<EquipableWeapon>().isEquiped = false;
+        RealObject.GetComponent<SphereCollider>().enabled = true;
+        RealObject.transform.position += new Vector3(0,-20,0);
+        RealObject.transform.parent = null;
+        menu.EquipedItems.Remove(RealObject);
+        menu.UpdateGearScore();
 
     }
 }

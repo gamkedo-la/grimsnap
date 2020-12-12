@@ -157,4 +157,15 @@ public class PlayerControl : MonoBehaviour
             pickUpTarget = null;
         }
     }
+
+    public void UpdateGearScore(float r, float d, float a)
+    {
+        meleeRange = r;
+        damage = d;
+
+        //Some kind of defense modifier can be added if we want
+        //armor = a;
+
+
+    }
 }

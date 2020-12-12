@@ -41,7 +41,7 @@ public class InventoryManager : MonoBehaviour
     {
 
         weaponsInInv.Remove(weapon);
-        weapon.transform.position = transform.position + new Vector3(Random.Range(.03f, .05f), Random.Range(.03f, .05f), -2.0f);
+        weapon.transform.position = transform.position + new Vector3(Random.Range(.03f, .05f), -0.8f, Random.Range(.03f, .05f));
 
     }
 
