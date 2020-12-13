@@ -35,6 +35,9 @@ public class PlayerControl : MonoBehaviour
 
     private bool MenuOpen = false;
 
+    [SerializeField]
+    private GameObject warpPoint1, warpPoint2, warpPoint3, warpPoint4;
+
     //Other entities such as enemy and misc need access to MoveToTerrain and FollowAndAttackTarget... move to generic class and change to return bools?
 
     void Start()
@@ -75,6 +78,26 @@ public class PlayerControl : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out click, 100);
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            move.warpToPosition(warpPoint1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            move.warpToPosition(warpPoint2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            move.warpToPosition(warpPoint3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            move.warpToPosition(warpPoint4);
         }
 
 

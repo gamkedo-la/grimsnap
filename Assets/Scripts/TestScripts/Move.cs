@@ -34,11 +34,16 @@ namespace Movement
         public void StopMoving()
         {
             navMeshAgent.SetDestination(transform.position);
+            Debug.Log("stopping");
         }
 
         public NavMeshAgent GetNavMeshAgent()
         {
             return navMeshAgent;
+        }
+
+        public void warpToPosition(GameObject warpPosition){
+            this.transform.position = warpPosition.transform.position;
         }
     }
 
