@@ -112,7 +112,7 @@ public class PlayerControl : MonoBehaviour
             if (!VectorMath.IsWithinDistance(meleeRange, transform.position, target.transform.position))
             {
                 animator.SetBool("isWalking", true);
-                move.MoveToTarget(speed, target.transform.position);
+                move.MoveToTarget(GetCurrentSpeed(), target.transform.position);
             }
             else
             {
@@ -122,6 +122,11 @@ public class PlayerControl : MonoBehaviour
                 attack.AttackTarget(target, damage);
             }
         }
+    }
+
+    private float GetCurrentSpeed()
+    {
+        return playerInput.running?speed*2f:speed;
     }
 
     private void ShowTargetHealth()
@@ -161,7 +166,7 @@ public class PlayerControl : MonoBehaviour
         else
         {
             animator.SetBool("isWalking", true);
-            move.MoveToTarget(speed, raycastHit.point);
+            move.MoveToTarget(GetCurrentSpeed(), raycastHit.point);
         }
     }
 

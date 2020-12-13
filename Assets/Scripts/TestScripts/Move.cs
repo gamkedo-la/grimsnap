@@ -17,6 +17,8 @@ namespace Movement
         void Start()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
+            // speed property is max speed, so maybe use higher acceleration for more control?
+            navMeshAgent.acceleration *= 3;
         }
         private void Update()
         {
