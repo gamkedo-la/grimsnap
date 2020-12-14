@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour
 
     public int AttackRange;
 
+    [SerializeField] GrimSnapAudio.AudioPlayer PlayerAudio;
+
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
@@ -44,6 +46,8 @@ public class EnemyController : MonoBehaviour
         WR = WanderRadius;
 
         AttackReset = AttackTimer;
+
+        PlayerAudio = Player.GetComponent<GrimSnapAudio.AudioPlayer>();
     }
 
     void Update()
@@ -71,6 +75,7 @@ public class EnemyController : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(newDirection);
 
             MusicManager.notifyMusicManager.Invoke(AudioState.Battle);
+            PlayerAudio.checkForEnemies = true;
 
             animator.SetBool("isAttacking", true);
             AttackTimer -= Time.deltaTime;

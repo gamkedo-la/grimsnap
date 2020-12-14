@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -16,6 +17,8 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioMixer mixer; //Todo, add Snapshot changes to Music Change Transitions
     public AudioMixerSnapshot gameStartSnapshot;
     public AudioMixerSnapshot normalMusicSnapshot;
+    public AudioMixerSnapshot fadeOutMusicSnapshot;
+    public float musicFadeTime = 1f;
 
     //public UnityAction<GameObject, AudioState> musicStateChange;
     [Header("Music Events")]
@@ -25,6 +28,7 @@ public class MusicManager : MonoBehaviour
     public UnityEvent playStinger;
     public static Action<AudioState> notifyMusicManager;
 
+    #region Music Initialization
     void Start()
     {
         notifyMusicManager += CompareAudioState;
@@ -49,11 +53,14 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    #endregion
+
     void Update()
     {
 
     }
 
+    #region Music State Change Logic
     public void MusicChange(AudioState audioState)
     {
         switch (audioState)
@@ -83,16 +90,15 @@ public class MusicManager : MonoBehaviour
         }
         else if (audioState != currentAudioState)
         {
+            StopCoroutine("RestartLevelMusic");
+            normalMusicSnapshot.TransitionTo(0.5f);
+
             if (playStingers)
             {
                 playStinger.Invoke();
             }
 
-            foreach (MusicStatePlayer music in musicList)
-            {
-                music.StopMusic();
-            }
-
+            StopLevelMusic();
             MusicChange(audioState);
             UpdateAudioState(audioState);
         }
@@ -103,7 +109,47 @@ public class MusicManager : MonoBehaviour
         currentAudioState = audioState;
         heldAudioState = currentAudioState;
     }
+    #endregion
 
+    #region Music Controls
+    private void StopLevelMusic()
+    {
+        foreach (MusicStatePlayer music in musicList)
+        {
+            music.StopMusic();
+        }
+    }
+    public void FadeOutMusic()
+    {
+        fadeOutMusicSnapshot.TransitionTo(musicFadeTime);
+    }
+
+    public void ExitBattleMusic()
+    {
+        StartCoroutine(RestartLevelMusic(musicFadeTime));
+    }
+
+    public IEnumerator RestartLevelMusic(float waitTime)
+    {
+        float offset = 0.1f;
+
+        yield return new WaitForSecondsRealtime(waitTime + offset);
+        FadeOutMusic();
+
+        yield return new WaitForSecondsRealtime(musicFadeTime);
+
+        StopLevelMusic();
+        UpdateAudioState(AudioState.Normal);
+        MusicChange(currentAudioState);
+        normalMusicSnapshot.TransitionTo(musicFadeTime);
+    }
+
+    public void SetMusicFadeTime(float time)
+    {
+        musicFadeTime = time;
+    }
+
+    #endregion
     private void OnDestroy()
     {
         notifyMusicManager -= CompareAudioState;
