@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -9,6 +10,7 @@ public class MusicManager : MonoBehaviour
     public bool playStingers;
     [SerializeField] AudioState currentAudioState;
     internal AudioState heldAudioState;
+    [SerializeField] List<MusicStatePlayer> musicList = new List<MusicStatePlayer>();
 
     [Header("Mixer Config")]
     [SerializeField] AudioMixer mixer; //Todo, add Snapshot changes to Music Change Transitions
@@ -25,15 +27,26 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
-        notifyMusicManager += MusicChange;
+        notifyMusicManager += CompareAudioState;
 
         UpdateAudioState(AudioState.Normal);
         MusicChange(currentAudioState);
+
+        InitializeMusicList();
 
         if (normalMusicSnapshot != null)
             normalMusicSnapshot.TransitionTo(2f);
         else
             Debug.LogError("Did you setup mixer in the music manager?");
+    }
+
+    private void InitializeMusicList()
+    {
+        var music = GetComponentsInChildren<MusicStatePlayer>();
+        foreach (MusicStatePlayer track in music)
+        {
+            musicList.Add(track);
+        }
     }
 
     void Update()
@@ -46,17 +59,17 @@ public class MusicManager : MonoBehaviour
         switch (audioState)
         {
             case AudioState.Normal:
-                CompareAudioState(audioState);
+                //CompareAudioState(audioState);
                 playNormalMusic.Invoke();
                 break;
 
             case AudioState.Battle:
-                CompareAudioState(audioState);
+                //CompareAudioState(audioState);
                 playBattleMusic.Invoke();
                 break;
 
             case AudioState.GameOver:
-                CompareAudioState(audioState);
+                //CompareAudioState(audioState);
                 playGameOverMusic.Invoke();
                 break;
         }
@@ -74,6 +87,13 @@ public class MusicManager : MonoBehaviour
             {
                 playStinger.Invoke();
             }
+
+            foreach (MusicStatePlayer music in musicList)
+            {
+                music.StopMusic();
+            }
+
+            MusicChange(audioState);
             UpdateAudioState(audioState);
         }
     }
@@ -86,6 +106,6 @@ public class MusicManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        notifyMusicManager -= MusicChange;
+        notifyMusicManager -= CompareAudioState;
     }
 }

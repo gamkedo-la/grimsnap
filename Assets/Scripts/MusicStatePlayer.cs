@@ -17,4 +17,9 @@ public class MusicStatePlayer : MonoBehaviour
     {
         controller.PlayMusic(music, gameObject);
     }
+
+    public void StopMusic()
+    {
+        controller.StopAll();
+    }
 }

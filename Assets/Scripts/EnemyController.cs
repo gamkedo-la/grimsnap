@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
 
-            //MusicManager.notifyMusicManager.Invoke(AudioState.Battle);
+            MusicManager.notifyMusicManager.Invoke(AudioState.Battle);
 
             animator.SetBool("isAttacking", true);
             AttackTimer -= Time.deltaTime;
