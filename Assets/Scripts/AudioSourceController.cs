@@ -76,6 +76,22 @@ public class AudioSourceController : MonoBehaviour
         }
     }
 
+    public void SetSourceProperties(MusicData dataToRead, AudioSource sourceToSet, GameObject calledBy)
+    {
+        if (dataToRead != null)
+        {
+            sourceToSet.clip = dataToRead.GetClip(calledBy);
+            sourceToSet.volume = dataToRead.GetVol();
+            sourceToSet.loop = dataToRead.IsLooping();
+            sourceToSet.spatialBlend = dataToRead.GetSpatialBlend();
+            sourceToSet.outputAudioMixerGroup = dataToRead.GetOutputGroup(calledBy);
+        }
+        else
+        {
+            Debug.LogError(calledBy.name + " Couldn't read audio data");
+        }
+    }
+
     public void SetPosition(Vector3 position)
     {
         transform.position = position;
@@ -88,6 +104,13 @@ public class AudioSourceController : MonoBehaviour
     #region AudioPlayback
 
     public void PlayAudio(AudioData audioToPlay, GameObject calledBy)
+    {
+        var source = GetNextSource();
+        SetSourceProperties(audioToPlay, source, calledBy);
+        source.Play();
+    }
+
+    public void PlayMusic(MusicData audioToPlay, GameObject calledBy) //TODO make play set of tracks
     {
         var source = GetNextSource();
         SetSourceProperties(audioToPlay, source, calledBy);

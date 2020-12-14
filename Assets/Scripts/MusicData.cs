@@ -11,6 +11,9 @@ public class MusicData : ScriptableObject
     [SerializeField] AudioOutputGroup output;
 
     [SerializeField] bool Loop = false;
+    [SerializeField] int bpm;
+    [SerializeField] int bars;
+
 
     [Range(-80, 0.0001f)]
     [SerializeField] float Volume;

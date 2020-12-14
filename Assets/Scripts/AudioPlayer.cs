@@ -1,7 +1,19 @@
-﻿namespace GrimSnapAudio
+﻿using UnityEngine;
+
+namespace GrimSnapAudio
 {
     public class AudioPlayer : AudioCharacter, IAudioActions
     {
+        [SerializeField] MusicManager musicManager;
+        [SerializeField] AudioState playerAudioState;
+
+        public void SetPlayerAudioState(AudioState audioState)
+        {
+            playerAudioState = audioState;
+
+            if (musicManager != null)
+                musicManager.MusicChange(playerAudioState);
+        }
         public void AttackAudio()
         {
             if (GetEvent(0) != null)
