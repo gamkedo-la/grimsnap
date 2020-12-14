@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
@@ -16,12 +13,12 @@ public class EnemyController : MonoBehaviour
     public float restMaxTime = 1.2f;
     [Space]
     public Animator animator;
-    
+
     private int patrolIndex = 0;
     private int PPPrevious;
 
     private NavMeshAgent navMeshAgent;
-    
+
     private float restTimer = 0.0f;
     private bool rest = true;
 
@@ -45,12 +42,10 @@ public class EnemyController : MonoBehaviour
         restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
         Player = GameObject.FindGameObjectWithTag("Player");
         WR = WanderRadius;
-               
-        AttackReset = AttackTimer;
-        
 
+        AttackReset = AttackTimer;
     }
-    
+
     void Update()
     {
         //OverlapSphere returns an array of colliders but by using the layer mask it 
@@ -75,6 +70,7 @@ public class EnemyController : MonoBehaviour
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
 
+            //MusicManager.notifyMusicManager.Invoke(AudioState.Battle);
 
             animator.SetBool("isAttacking", true);
             AttackTimer -= Time.deltaTime;
@@ -94,12 +90,12 @@ public class EnemyController : MonoBehaviour
 
 
 
-             
 
 
-            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange 
+
+            if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange
                 && Vector3.Distance(transform.position,
-                ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position, 
+                ClosestPointOnLine(patrolPoints[PPPrevious].position, patrolPoints[patrolIndex].position,
                 Player.transform.position))
                 < WanderRadius)
             {
@@ -176,7 +172,7 @@ public class EnemyController : MonoBehaviour
                 restTimer -= Time.deltaTime;
             }
         }
-        
+
     }
 
     private void OnDrawGizmos()

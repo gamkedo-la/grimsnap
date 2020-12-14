@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
 public enum AudioState { Normal, Battle, GameOver }
@@ -20,10 +21,12 @@ public class MusicManager : MonoBehaviour
     public UnityEvent playBattleMusic;
     public UnityEvent playGameOverMusic;
     public UnityEvent playStinger;
-
+    public static Action<AudioState> notifyMusicManager;
 
     void Start()
     {
+        notifyMusicManager += MusicChange;
+
         UpdateAudioState(AudioState.Normal);
         MusicChange(currentAudioState);
 
@@ -48,10 +51,12 @@ public class MusicManager : MonoBehaviour
                 break;
 
             case AudioState.Battle:
+                CompareAudioState(audioState);
                 playBattleMusic.Invoke();
                 break;
 
             case AudioState.GameOver:
+                CompareAudioState(audioState);
                 playGameOverMusic.Invoke();
                 break;
         }
@@ -77,5 +82,10 @@ public class MusicManager : MonoBehaviour
     {
         currentAudioState = audioState;
         heldAudioState = currentAudioState;
+    }
+
+    private void OnDestroy()
+    {
+        notifyMusicManager -= MusicChange;
     }
 }
