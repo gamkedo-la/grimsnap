@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5696287405333631250}
   - component: {fileID: 6175144519414397052}
   - component: {fileID: -3233060892316978321}
+  - component: {fileID: -3675839501222146236}
   m_Layer: 5
   m_Name: temp sword image
   m_TagString: InventoryEquipment
@@ -94,7 +95,14 @@ MonoBehaviour:
   selected: 0
   dimensions: {x: 0, y: 0}
   Overlap: []
+  survey: []
   Coll: {fileID: 7587829029115262931, guid: 9e29833c5f58743418f05a8453d6b6d4, type: 3}
+  closest: {fileID: 0}
+  Last: {fileID: 0}
+  Holder: {fileID: 0}
+  ThisEquipment: 0
+  WorldSlot: {fileID: 0}
+  Stats: {fileID: 6519719087224110410, guid: 156d86dca12f2ca46b351b7ed11f2087, type: 3}
 --- !u!114 &-3233060892316978321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +157,46 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &-3675839501222146236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5696287405333631260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6175144519414397052}
+          m_MethodName: CreateStats
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6175144519414397052}
+          m_MethodName: DestroyStats
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

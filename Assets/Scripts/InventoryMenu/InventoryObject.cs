@@ -30,6 +30,9 @@ public class InventoryObject : MonoBehaviour
 
     public GameObject WorldSlot;
 
+    public GameObject Stats;
+    GameObject S;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -303,9 +306,22 @@ public class InventoryObject : MonoBehaviour
         RealObject.GetComponent<EquipableWeapon>().isEquiped = false;
         RealObject.GetComponent<SphereCollider>().enabled = true;
         RealObject.transform.position += new Vector3(0,-20,0);
+        RealObject.transform.Rotate(Vector3.up, Random.Range(0, 360));
         RealObject.transform.parent = null;
         menu.EquipedItems.Remove(RealObject);
         menu.UpdateGearScore();
+
+    }
+
+    public void CreateStats()
+    {
+        S = Instantiate(Stats, transform.position, Quaternion.identity, transform);
+        S.GetComponent<StatsPopup>().InfoSource = RealObject;
+    }
+
+    public void DestroyStats()
+    {
+        Destroy(S);
 
     }
 }
