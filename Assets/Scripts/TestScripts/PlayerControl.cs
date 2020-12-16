@@ -34,6 +34,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject pickUpTarget;
 
     private bool MenuOpen = false;
+    
+    private bool isRunning = false;
 
     [SerializeField]
     private GameObject warpPoint1, warpPoint2, warpPoint3, warpPoint4;
@@ -62,6 +64,12 @@ public class PlayerControl : MonoBehaviour
     {
         if (playerInput.leftClick && MenuOpen == false) 
         {
+            if (!isRunning && playerInput.running)
+            {
+                Debug.Log("player starts running");
+            }
+            isRunning |= playerInput.running;
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out raycastHit, 100);
             //if (Physics.Raycast(ray, out raycastHit, 100))
@@ -142,6 +150,7 @@ public class PlayerControl : MonoBehaviour
                 animator.SetBool("isWalking", false);
                 animator.SetTrigger("Attack1");
                 move.StopMoving();
+                StopRunning();
                 attack.AttackTarget(target, damage);
             }
         }
@@ -149,7 +158,8 @@ public class PlayerControl : MonoBehaviour
 
     private float GetCurrentSpeed()
     {
-        return playerInput.running?speed*2f:speed;
+        float currentSpeed = isRunning || playerInput.running?speed*2f:speed;
+        return currentSpeed;
     }
 
     private void ShowTargetHealth()
@@ -184,6 +194,7 @@ public class PlayerControl : MonoBehaviour
         if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
         {
             animator.SetBool("isWalking", false);
+            StopRunning();
             return;
         }
         else
@@ -191,6 +202,15 @@ public class PlayerControl : MonoBehaviour
             animator.SetBool("isWalking", true);
             move.MoveToTarget(GetCurrentSpeed(), raycastHit.point);
         }
+    }
+
+    private void StopRunning()
+    {
+        if (isRunning)
+        {
+            Debug.Log("player stops running");
+        }
+        isRunning = false;
     }
 
     public void OpenMenu()
