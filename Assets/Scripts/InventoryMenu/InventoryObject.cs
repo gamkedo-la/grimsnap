@@ -317,11 +317,13 @@ public class InventoryObject : MonoBehaviour
     {
         S = Instantiate(Stats, transform.position, Quaternion.identity, transform);
         S.GetComponent<StatsPopup>().InfoSource = RealObject;
+        transform.parent = menu.transform;
     }
 
     public void DestroyStats()
     {
         Destroy(S);
+        transform.parent = Holder.transform;
 
     }
 }

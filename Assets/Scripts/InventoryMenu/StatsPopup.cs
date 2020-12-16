@@ -41,8 +41,10 @@ public class StatsPopup : MonoBehaviour
 
         }
 
-        GetComponent<RectTransform>().sizeDelta = new Vector2(100, (bookmark * 17) + 22);
         //add something here for other properties if they ever come up
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(100, (bookmark * 17) + 22);
+        
 
         for(int x = bookmark; x< properties.Length; x++)
         {
