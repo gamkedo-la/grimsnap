@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     public float speed = 50;
     public float meleeRange = 2;
     public float damage = 5;
+    public float armor = 0;
 
     //Data from ray cast
     RaycastHit raycastHit;
@@ -247,10 +248,9 @@ public class PlayerControl : MonoBehaviour
     {
         meleeRange = r;
         damage = d;
+        armor = a;
 
-        //Some kind of defense modifier can be added if we want
-        //armor = a;
-
+        GetComponent<Health>().armorModifier = 1 - ((0.03f * armor) / (1 + (0.04f * Mathf.Abs(armor))));
 
     }
 }

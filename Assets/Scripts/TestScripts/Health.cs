@@ -7,6 +7,8 @@ public class Health : MonoBehaviour
     public float health;
     public bool isDead = false;
 
+    public float armorModifier = 1;
+
     [SerializeField] AudioCharacter characterAudioprofile;
     internal IAudioActions audioAction;
 
@@ -21,7 +23,8 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Debug.Log("Taking Damage" + transform.name);
-        health -= damage;
+        health -= damage * armorModifier;
+        
 
         if (audioAction != null)
             audioAction.TakeDamageAudio();

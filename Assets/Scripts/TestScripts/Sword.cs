@@ -8,6 +8,7 @@ public class Sword : MonoBehaviour
     public int minDamage;
     public int maxDamage;
     public float range;
+    public float armor;
 
     private int damageFinal;
 
@@ -24,6 +25,7 @@ public class Sword : MonoBehaviour
 
         thisWeapon.SetDamage(damageFinal);
         thisWeapon.SetRange(range);
+        thisWeapon.SetArmor(armor);
         thisWeapon.SetInvDim(InvDimensions);
         thisWeapon.InventorySprite = INV;
 
