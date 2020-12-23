@@ -36,6 +36,8 @@ public class EnemyController : MonoBehaviour
 
     public int AttackRange;
 
+    public int EXPGiven;
+
     [SerializeField] GrimSnapAudio.AudioPlayer PlayerAudio;
 
     void Start()

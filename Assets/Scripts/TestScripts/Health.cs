@@ -9,12 +9,15 @@ public class Health : MonoBehaviour
 
     public float armorModifier = 1;
 
+    public GameObject player;
+
     [SerializeField] AudioCharacter characterAudioprofile;
     internal IAudioActions audioAction;
 
     private void Awake()
     {
         health = maxHealth;
+        player = GameObject.FindGameObjectWithTag("Player");
 
         if (characterAudioprofile is IAudioActions)
             audioAction = GetComponent<IAudioActions>();
@@ -50,6 +53,8 @@ public class Health : MonoBehaviour
 
     private void Kill()
     {
+
+        player.GetComponent<PlayerLevel>().GainEXP(GetComponent<EnemyController>().EXPGiven);
         Destroy(this.gameObject);
     }
 }

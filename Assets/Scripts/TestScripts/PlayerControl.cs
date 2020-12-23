@@ -121,6 +121,7 @@ public class PlayerControl : MonoBehaviour
             FollowTarget();
             //Debug.Log("following " + target.name);
             ShowTargetHealth();
+
             return;
         }
         if (click.transform.tag == "Equipment")
