@@ -66,7 +66,7 @@ namespace GrimSnapAudio
 
             if (enemies > 0)
             {
-                Debug.Log("Enemies detected");
+                //Debug.Log("Enemies detected");
                 return true;
             }
             else
