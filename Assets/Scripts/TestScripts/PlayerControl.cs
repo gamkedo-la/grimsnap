@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     Animator animator;
     Attack attack;
     InventoryManager Inv;
+    TargetHealth targetHealth;
 
     // Need to pull speed from movementData script, meleeRange and damage from equipped melee
     public float speed = 50;
@@ -28,9 +29,6 @@ public class PlayerControl : MonoBehaviour
     RaycastHit raycastHit;
     RaycastHit click;
     Health target;
-    public TextMeshProUGUI targetNameText;
-    public Image targetHealthImage;
-    public Image targetHealthImageFill;
 
     public GameObject pickUpTarget;
 
@@ -50,6 +48,7 @@ public class PlayerControl : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         attack = GetComponent<Attack>();
         Inv = GetComponent<InventoryManager>();
+        targetHealth = GetComponent<TargetHealth>();
     }
 
     void Update()
@@ -120,7 +119,7 @@ public class PlayerControl : MonoBehaviour
             target = click.transform.GetComponent<Health>();
             FollowTarget();
             //Debug.Log("following " + target.name);
-            ShowTargetHealth();
+            targetHealth.ShowTargetHealth(target);
 
             return;
         }
@@ -132,7 +131,7 @@ public class PlayerControl : MonoBehaviour
         }
         if (click.transform.tag != "Enemy")
         {
-            HideTargetHealth();
+            targetHealth.HideTargetHealth();
         }
 
             MoveToTerrain();
@@ -162,32 +161,6 @@ public class PlayerControl : MonoBehaviour
     {
         float currentSpeed = isRunning || playerInput.running?speed*2f:speed;
         return currentSpeed;
-    }
-
-    private void ShowTargetHealth()
-    {
-        if (target != null)
-        {
-            if (target.health <= 0) 
-            { 
-                HideTargetHealth(); 
-            }
-            else
-            {
-                targetNameText.enabled = true;
-                targetHealthImage.enabled = true;
-                targetHealthImageFill.enabled = true;
-                targetNameText.text = target.name;
-                targetHealthImageFill.fillAmount = target.health / target.maxHealth;
-            }
-        }
-    }
-
-    private void HideTargetHealth()
-    {
-        targetNameText.enabled = false;
-        targetHealthImage.enabled = false;
-        targetHealthImageFill.enabled = false;
     }
 
     private void MoveToTerrain()
