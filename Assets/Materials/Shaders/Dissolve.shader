@@ -2,14 +2,16 @@
 {
 	Properties
 	{
+		_Cutoff( "Mask Clip Value", Float ) = 0.69
 		_Vector0("Vector 0", Vector) = (1,1,0,0)
 		_Opacitycutoff("Opacity cut off", Float) = 0
-		_Length1("Length", Float) = 1
-		_Offset1("Offset", Float) = 2
+		_Length("Length", Float) = 1
+		_Offset("Offset", Float) = 2
 		_Screenspacespot("Screenspace spot", 2D) = "white" {}
 		_Noisescale("Noise scale", Float) = 15
-		_Cutoff( "Mask Clip Value", Float ) = 0.69
 		_Color1("Color 1", Color) = (0.3113208,0.309988,0.2936988,0)
+		_TextureSample0("Texture Sample 0", 2D) = "white" {}
+		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 		[HideInInspector] __dirty( "", Int ) = 1
 	}
 
@@ -21,22 +23,25 @@
 		#include "UnityShaderVariables.cginc"
 		#pragma target 3.0
 		#pragma exclude_renderers xbox360 xboxone ps4 psp2 n3ds wiiu 
-		#pragma surface surf Standard keepalpha vertex:vertexDataFunc 
+		#pragma surface surf Standard keepalpha exclude_path:deferred nofog vertex:vertexDataFunc 
 		struct Input
 		{
+			float2 uv_texcoord;
 			half ASEVFace : VFACE;
 			float4 screenPosition;
 			float eyeDepth;
 			float4 vertexColor : COLOR;
 		};
 
+		uniform sampler2D _TextureSample0;
+		uniform float4 _TextureSample0_ST;
 		uniform float4 _Color1;
 		uniform float _Opacitycutoff;
 		uniform float2 _Vector0;
 		uniform float _Noisescale;
 		uniform sampler2D _Screenspacespot;
-		uniform float _Length1;
-		uniform float _Offset1;
+		uniform float _Length;
+		uniform float _Offset;
 		uniform float _Cutoff = 0.69;
 
 
@@ -114,8 +119,8 @@
 
 		void surf( Input i , inout SurfaceOutputStandard o )
 		{
-			float4 color37 = IsGammaSpace() ? float4(0.3696515,0.8301887,0.2741189,0) : float4(0.1125829,0.6562665,0.06107182,0);
-			float4 switchResult36 = (((i.ASEVFace>0)?(color37):(_Color1)));
+			float2 uv_TextureSample0 = i.uv_texcoord * _TextureSample0_ST.xy + _TextureSample0_ST.zw;
+			float4 switchResult36 = (((i.ASEVFace>0)?(tex2D( _TextureSample0, uv_TextureSample0 )):(_Color1)));
 			o.Albedo = switchResult36.rgb;
 			o.Alpha = 1;
 			float4 ase_screenPos = i.screenPosition;
@@ -126,9 +131,9 @@
 			float2 temp_output_22_0 = ( (ase_screenPosNorm).xy * _Vector0 );
 			float simplePerlin3D30 = snoise( float3( temp_output_22_0 ,  0.0 )*_Noisescale );
 			simplePerlin3D30 = simplePerlin3D30*0.5 + 0.5;
-			float4 clampResult54 = clamp( ( 1.0 - ( ( _Opacitycutoff + simplePerlin3D30 ) * tex2D( _Screenspacespot, temp_output_22_0 ) ) ) , float4( 0.3773585,0.3773585,0.3773585,0 ) , float4( 1,1,1,0 ) );
-			float cameraDepthFade52 = (( i.eyeDepth -_ProjectionParams.y - _Offset1 ) / _Length1);
-			dither49 = step( dither49, ( clampResult54 * cameraDepthFade52 ).r );
+			float clampResult54 = clamp( ( 1.0 - ( ( _Opacitycutoff + simplePerlin3D30 ) * tex2D( _Screenspacespot, temp_output_22_0 ).r ) ) , 0.3773585 , 1.0 );
+			float cameraDepthFade52 = (( i.eyeDepth -_ProjectionParams.y - _Offset ) / _Length);
+			dither49 = step( dither49, ( clampResult54 * cameraDepthFade52 ) );
 			clip( ( dither49 + ( 1.0 - i.vertexColor.r ) ) - _Cutoff );
 		}
 
