@@ -227,4 +227,11 @@ public class PlayerControl : MonoBehaviour
         GetComponent<Health>().armorModifier = 1 - ((0.03f * armor) / (1 + (0.04f * Mathf.Abs(armor))));
 
     }
+
+    public void ClearTarget()
+    {
+        raycastHit = new RaycastHit();
+        click = new RaycastHit();
+        move.StopMoving();
+    }
 }

@@ -44,6 +44,7 @@ namespace Movement
 
         public void warpToPosition(GameObject warpPosition){
             this.transform.position = warpPosition.transform.position;
+            GetComponent<PlayerControl>().ClearTarget();
         }
     }
 
