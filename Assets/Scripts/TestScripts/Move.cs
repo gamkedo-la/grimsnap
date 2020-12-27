@@ -33,7 +33,7 @@ namespace Movement
 
         public void StopMoving()
         {
-            navMeshAgent.SetDestination(transform.position);
+            navMeshAgent.ResetPath();
             Debug.Log("stopping");
         }
 
