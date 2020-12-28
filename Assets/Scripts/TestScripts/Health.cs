@@ -50,6 +50,11 @@ public class Health : MonoBehaviour
     {
         return health;
     }
+    
+    public void Refill()
+    {
+        health = maxHealth;
+    }
 
     private void Kill()
     {
@@ -57,4 +62,5 @@ public class Health : MonoBehaviour
         player.GetComponent<PlayerLevel>().GainEXP(GetComponent<EnemyController>().EXPGiven);
         Destroy(this.gameObject);
     }
+    
 }

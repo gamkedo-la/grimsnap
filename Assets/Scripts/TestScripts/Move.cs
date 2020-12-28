@@ -33,7 +33,7 @@ namespace Movement
 
         public void StopMoving()
         {
-            navMeshAgent.SetDestination(transform.position);
+            navMeshAgent.ResetPath();
             Debug.Log("stopping");
         }
 
@@ -44,6 +44,7 @@ namespace Movement
 
         public void warpToPosition(GameObject warpPosition){
             this.transform.position = warpPosition.transform.position;
+            GetComponent<PlayerControl>().ClearTarget();
         }
     }
 
