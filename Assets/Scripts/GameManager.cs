@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private Lives playerLives;
     private ResetLocations bonfires;
 
+    private bool isMainSceneInBackground = false;
+
     void Start()
     {
         playerHealth = player.GetComponent<Health>();
@@ -21,23 +23,45 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (playerHealth.GetHealth() <= 0)
+        if (!isMainSceneInBackground)
         {
-            playerLives.LooseLive();
-            if (playerLives.IsNoLivesLeft())
+            if (playerHealth.GetHealth() <= 0)
             {
-                loadScene.LoadGameOverScreenScene();
+                playerLives.LooseLive();
+                if (playerLives.IsNoLivesLeft())
+                {
+                    loadScene.LoadGameOverScreenScene();
+                }
+                else
+                {
+                    ShowLivesThenReset();
+                }
             }
-            else
-            {
-                playerHealth.Refill();
-                bonfires.ResetPlayer();
-            }
-        }
 
-        if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
-        {
-            loadScene.LoadWinScreenScene();
+            if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
+            {
+                loadScene.LoadWinScreenScene();
+            }
         }
     }
+
+    private void ShowLivesThenReset()
+    {
+        if(!isMainSceneInBackground)
+        {
+            isMainSceneInBackground = true;
+            loadScene.DisplayNextLifeScreenScene();
+            Invoke("LoadLevelAgain", 3f);
+        }
+    }
+
+    private void LoadLevelAgain()
+    {
+        isMainSceneInBackground = false;
+        loadScene.HideNextLifeScreenScene();
+        playerHealth.Refill();
+        bonfires.ResetPlayer();
+    }
+
+
 }
