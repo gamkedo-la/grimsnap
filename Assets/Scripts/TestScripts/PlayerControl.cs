@@ -152,6 +152,7 @@ public class PlayerControl : MonoBehaviour
                 animator.SetTrigger("Attack1");
                 move.StopMoving();
                 StopRunning();
+                this.transform.LookAt(target.transform.position);
                 attack.AttackTarget(target, damage);
             }
         }
