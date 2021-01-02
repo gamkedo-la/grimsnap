@@ -211,7 +211,7 @@ public class EnemyController : MonoBehaviour
 
     public void KnockBack(Vector3 knockBackVector)
     {
-        rigidbody.AddForce(knockBackVector * 250);
+        rigidBody.AddForce(knockBackVector * 250);
     }
 
 }
