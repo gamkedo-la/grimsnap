@@ -18,6 +18,7 @@ public class EnemyController : MonoBehaviour
     private int PPPrevious;
 
     private NavMeshAgent navMeshAgent;
+    private Rigidbody rigidBody;
 
     private float restTimer = 0.0f;
     private bool rest = true;
@@ -43,6 +44,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
+        rigidBody = this.GetComponent<Rigidbody>();
         restTimer = UnityEngine.Random.Range(restMinTime, restMaxTime);
         Player = GameObject.FindGameObjectWithTag("Player");
         WR = WanderRadius;
@@ -94,11 +96,6 @@ public class EnemyController : MonoBehaviour
         {
             animator.SetBool("isAttacking", false);
             AttackTimer = AttackReset;
-
-
-
-
-
 
             if (Vector3.Distance(transform.position, Player.transform.position) < VisualRange
                 && Vector3.Distance(transform.position,
@@ -210,6 +207,11 @@ public class EnemyController : MonoBehaviour
         dotP = Mathf.Clamp(dotP, 0f, magnitudeMax);
         return (LineOrigin + heading * dotP);
 
+    }
+
+    public void KnockBack(Vector3 knockBackVector)
+    {
+        rigidbody.AddForce(knockBackVector * 250);
     }
 
 }

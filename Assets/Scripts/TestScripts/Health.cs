@@ -27,8 +27,9 @@ public class Health : MonoBehaviour
     {
         Debug.Log("Taking Damage" + transform.name);
         health -= damage * armorModifier;
-        
 
+        this.transform.LookAt(player.transform.position);
+        
         if (audioAction != null)
             audioAction.TakeDamageAudio();
         else
