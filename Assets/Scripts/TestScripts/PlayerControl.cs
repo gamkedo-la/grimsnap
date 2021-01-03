@@ -18,6 +18,7 @@ public class PlayerControl : MonoBehaviour
     Attack attack;
     InventoryManager Inv;
     TargetHealth targetHealth;
+    public bool canDealDamageThisFrame = false;
 
     // Need to pull speed from movementData script, meleeRange and damage from equipped melee
     public float speed = 50;
@@ -234,5 +235,9 @@ public class PlayerControl : MonoBehaviour
         raycastHit = new RaycastHit();
         click = new RaycastHit();
         move.StopMoving();
+    }
+
+    public void ToggleCanDealDamageThisFrame(){
+        canDealDamageThisFrame = true;
     }
 }
