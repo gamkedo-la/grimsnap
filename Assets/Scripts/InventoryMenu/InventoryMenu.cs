@@ -67,6 +67,15 @@ public class InventoryMenu : MonoBehaviour
                 Active = false;
             }
         }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+
+            GetComponent<CanvasGroup>().alpha = 0;
+            GetComponent<CanvasGroup>().interactable = false;
+            GetComponent<CanvasGroup>().blocksRaycasts = false;
+            Active = false;
+
+        }
     }
 
     public bool AddItem(GameObject item)
