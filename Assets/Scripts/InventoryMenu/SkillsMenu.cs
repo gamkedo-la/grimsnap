@@ -8,6 +8,8 @@ public class SkillsMenu : MonoBehaviour
     bool Active = false;
     private PlayerControl Player;
 
+    public List<SkillButton> skillButtons = new List<SkillButton>();
+
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,8 @@ public class SkillsMenu : MonoBehaviour
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
                 Player.OpenMenu();
                 Active = true;
+                RefreshButtons();
+   
 
             }
             else if (Active == true)
@@ -47,6 +51,19 @@ public class SkillsMenu : MonoBehaviour
             GetComponent<CanvasGroup>().interactable = false;
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             Active = false;
+
+        }
+
+    }
+
+    public void RefreshButtons()
+    {
+
+
+        foreach (SkillButton SB in skillButtons)
+        {
+
+            SB.Activate();
 
         }
 

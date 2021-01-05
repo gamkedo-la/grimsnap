@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLevel : MonoBehaviour
 {
@@ -11,10 +12,14 @@ public class PlayerLevel : MonoBehaviour
 
     public int SkillPoints = 0;
 
+    public Text MenuSkillPoints;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        MenuSkillPoints.text = SkillPoints.ToString();
+
     }
 
     // Update is called once per frame
@@ -43,6 +48,15 @@ public class PlayerLevel : MonoBehaviour
 
             LevelUp();
         }
+
+    }
+
+    public void unlockSkill (int cost)
+    {
+
+        SkillPoints -= cost;
+
+        MenuSkillPoints.text = SkillPoints.ToString();
 
     }
 

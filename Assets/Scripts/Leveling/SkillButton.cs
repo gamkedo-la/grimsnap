@@ -1,17 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SkillButton : MonoBehaviour
 {
-    public string skillInfo;
-    public GameObject box;
-    public GameObject thisBox;
+
+    public SkillButton PreReq;
+
+    public bool unlocked;
+
+    PlayerLevel PlayerL;
+
+    public SkillsMenu skillsMenu;
+
+    public int skillCost = 1;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerL = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLevel>();
     }
 
     // Update is called once per frame
@@ -20,15 +29,43 @@ public class SkillButton : MonoBehaviour
         
     }
 
-    public void DisplaySkillInfo()
+    public void Activate()
     {
+        GetComponent<Button>().interactable = false;
+        if(PlayerL.SkillPoints < skillCost)
+        {
+            return;
+
+        }
+
+        if(PreReq == null && PlayerL.SkillPoints >= skillCost && unlocked == false)
+        {
+            GetComponent<Button>().interactable = true;
+            return;
+
+
+        }
+        if(PreReq != null && PreReq.unlocked == true && PlayerL.SkillPoints >= skillCost && unlocked == false)
+        {
+            GetComponent<Button>().interactable = true;
+            return;
+
+        }
+
 
 
     }
-    public void DestroySkillInfo()
-    {
 
+    public void SelectedSkill()
+    {
+        GetComponent<Button>().interactable = false;
+        unlocked = true;
+        skillsMenu.RefreshButtons();
+        PlayerL.unlockSkill(skillCost);
 
     }
+
+    
+
 
 }
