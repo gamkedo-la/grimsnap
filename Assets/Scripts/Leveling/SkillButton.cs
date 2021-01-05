@@ -60,8 +60,9 @@ public class SkillButton : MonoBehaviour
     {
         GetComponent<Button>().interactable = false;
         unlocked = true;
-        skillsMenu.RefreshButtons();
+        
         PlayerL.unlockSkill(skillCost);
+        skillsMenu.RefreshButtons();
 
     }
 
