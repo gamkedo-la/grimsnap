@@ -53,6 +53,7 @@ MonoBehaviour:
   Contents: {fileID: 0}
   Column: 1
   Row: 1
+  Grid: {fileID: 0}
   Coll: {fileID: 7587829029115262931, guid: 9e29833c5f58743418f05a8453d6b6d4, type: 3}
 --- !u!222 &1624281463709835357
 CanvasRenderer:
@@ -75,14 +76,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.541559, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 93a5359f5d7951448812db6ba30d5693, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

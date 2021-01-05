@@ -13,6 +13,8 @@ public class InventoryGridGen : MonoBehaviour
     public int tileWidth =50;
     public int tileHeight = 50;
 
+    public int borderWidth = 4;
+
     public List<InventoryGridNode> AllTiles = new List<InventoryGridNode>();
 
     public Transform Holder;
@@ -23,7 +25,7 @@ public class InventoryGridGen : MonoBehaviour
         float allWidth = tileWidth * Columns;
         float allHeight = tileHeight * Rows;
         RectTransform rt = GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(allWidth, allHeight);
+        rt.sizeDelta = new Vector2(allWidth + borderWidth, allHeight + borderWidth);
         for(int r = 1; r <= Rows; r++)
         {
             for(int c = 1; c <= Columns; c++)
