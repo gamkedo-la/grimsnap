@@ -6,19 +6,29 @@ using UnityEngine.UI;
 public class PlayerLevel : MonoBehaviour
 {
 
-    public int EXP = 0;
-    public int NextLevelEXP = 100;
+    public float EXP = 0;
+    public float NextLevelEXP = 100;
     public int CurrentLevel = 1;
 
     public int SkillPoints = 0;
 
     public Text MenuSkillPoints;
 
+    public Text MenuLevelDisplay;
+
+    public Image expBar;
+
+    public GameObject LevelUpMessage;
+
     // Start is called before the first frame update
     void Start()
     {
 
         MenuSkillPoints.text = SkillPoints.ToString();
+
+        MenuLevelDisplay.text = CurrentLevel.ToString();
+
+        expBar.fillAmount = (EXP / NextLevelEXP);
 
     }
 
@@ -37,6 +47,9 @@ public class PlayerLevel : MonoBehaviour
         CurrentLevel++;
         SkillPoints++;
 
+        MenuLevelDisplay.text = CurrentLevel.ToString();
+        LevelUpMessage.SetActive(true);
+
     }
 
     public void GainEXP(int xp)
@@ -48,7 +61,7 @@ public class PlayerLevel : MonoBehaviour
 
             LevelUp();
         }
-
+        expBar.fillAmount = (EXP / NextLevelEXP);
     }
 
     public void unlockSkill (int cost)
@@ -57,6 +70,7 @@ public class PlayerLevel : MonoBehaviour
         SkillPoints -= cost;
 
         MenuSkillPoints.text = SkillPoints.ToString();
+        
 
     }
 
