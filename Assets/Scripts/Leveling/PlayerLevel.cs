@@ -48,6 +48,7 @@ public class PlayerLevel : MonoBehaviour
         SkillPoints++;
 
         MenuLevelDisplay.text = CurrentLevel.ToString();
+        MenuSkillPoints.text = SkillPoints.ToString();
 
         LevelUpMessage.GetComponent<LevelPopup>().Level = CurrentLevel;
         LevelUpMessage.GetComponent<LevelPopup>().DisplayPopup();
