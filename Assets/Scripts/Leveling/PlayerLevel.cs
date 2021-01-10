@@ -16,7 +16,7 @@ public class PlayerLevel : MonoBehaviour
 
     public Text MenuLevelDisplay;
 
-    public Image expBar;
+    public Slider expBar;
 
     public GameObject LevelUpMessage;
 
@@ -28,7 +28,7 @@ public class PlayerLevel : MonoBehaviour
 
         MenuLevelDisplay.text = CurrentLevel.ToString();
 
-        expBar.fillAmount = (EXP / NextLevelEXP);
+        expBar.value = (EXP / NextLevelEXP);
 
     }
 
@@ -64,7 +64,7 @@ public class PlayerLevel : MonoBehaviour
 
             LevelUp();
         }
-        expBar.fillAmount = (EXP / NextLevelEXP);
+        expBar.value = (EXP / NextLevelEXP);
     }
 
     public void unlockSkill (int cost)
