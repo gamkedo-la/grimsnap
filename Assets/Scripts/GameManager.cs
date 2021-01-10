@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         if(!isMainSceneInBackground)
         {
             isMainSceneInBackground = true;
-            loadScene.DisplayNextLifeScreenScene();
+            loadScene.DisplayNextLifeScreenScene(playerLives.lives);
             Invoke("LoadLevelAgain", 3f);
         }
     }
