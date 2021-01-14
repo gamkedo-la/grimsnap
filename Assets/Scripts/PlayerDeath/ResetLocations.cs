@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace PlayerDeath
@@ -6,14 +7,21 @@ namespace PlayerDeath
     public class ResetLocations : MonoBehaviour
     {
         public Vector3 resetLocation;
-        public GameObject player;
+        private PlayerControl player;
 
         private void Awake()
         {
-            resetLocation = GameObject.FindGameObjectWithTag("Player").transform.position;
-            Debug.Log($"default player location after death: {resetLocation.ToString()}");
-
-            player = GameObject.FindGameObjectWithTag("Player");
+            GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+            player = playerGO.GetComponent<PlayerControl>();
+            if (playerGO != null)
+            {
+                resetLocation = player.transform.position;
+                // Debug.Log($"default player location after death: {resetLocation.ToString()}");
+            }
+            else
+            {
+                Debug.LogError("no object with player or PlayerControl script on it found");
+            }
         }
 
         public void ChangeResetLocation(Vector3 next)
@@ -27,7 +35,7 @@ namespace PlayerDeath
             player.transform.position = resetLocation;
             Debug.Log($"Player location reset to {player.transform.position.ToString()}");
             
-            player.GetComponent<PlayerControl>().ClearTarget();
+            player.ClearTarget();
         }
     }
 }
