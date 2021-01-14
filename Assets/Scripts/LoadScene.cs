@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class LoadScene : MonoBehaviour
 {
+    public GameObject winPanel;
+    public GameObject gameOverPanel;
+    public GameObject nextLifePanel;
+    public GameObject gameUi;
+    
     private static string multipleLivesLabel = "remain";
     private static string singleLiveLabel = "remains";
     private static string _nextLiveScreen = "Next Live Screen";
@@ -38,7 +43,7 @@ public class LoadScene : MonoBehaviour
 
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("Main", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Main");
     }
 
     public void LoadWinScreenScene()
