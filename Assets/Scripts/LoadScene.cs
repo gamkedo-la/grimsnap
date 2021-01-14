@@ -1,71 +1,58 @@
-﻿using System;
-using PlayerDeath;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoadScene : MonoBehaviour
 {
+    private const string MultipleLivesLabel = "remain";
+    private const string SingleLiveLabel = "remains";
     public GameObject winPanel;
     public GameObject gameOverPanel;
-    public GameObject nextLifePanel;
     public GameObject gameUi;
-    
-    private static string multipleLivesLabel = "remain";
-    private static string singleLiveLabel = "remains";
-    private static string _nextLiveScreen = "Next Live Screen";
+    public GameObject nextLifePanel;
 
-    private static int livesToDisplay;
-
-    private void Start()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        if (scene.name.Equals(_nextLiveScreen))
-        {
-            Text numberLives = GameObject.Find("numberLives").GetComponent<Text>();
-            numberLives.text = livesToDisplay.ToString();
-
-            Text livesLabel = GameObject.Find("remain").GetComponent<Text>();
-            if (livesToDisplay <= 1)
-            {
-                livesLabel.text = singleLiveLabel;
-            }
-            else
-            {
-                livesLabel.text = multipleLivesLabel;
-            }
-        }
-    }
+    public GameObject numberLivesTextPart;
+    public GameObject livesRemainTextPart;
 
     public void LoadMainScene()
     {
         SceneManager.LoadScene("Main");
+        Debug.Log("loaded Main scene");
     }
 
-    public void LoadWinScreenScene()
+    public void DisplayWinScreen()
     {
-        SceneManager.LoadScene("Win Screen");
+        gameUi.SetActive(false);
+        winPanel.SetActive(true);
     }
 
-    public void LoadGameOverScreenScene()
+    public void DisplayGameOverScreen()
     {
-        SceneManager.LoadScene("Game Over Screen");
+        gameUi.SetActive(false);
+        gameOverPanel.SetActive(true);
     }
 
-    public void DisplayNextLifeScreenScene(int playerLives)
+    public void DisplayNextLifeScreen(int playerLives)
     {
-        livesToDisplay = playerLives;
-        SceneManager.LoadScene(_nextLiveScreen, LoadSceneMode.Additive);
+        UpdateNextLifeInfo(playerLives);
+        gameUi.SetActive(false);
+        nextLifePanel.SetActive(true);
+    }
+
+    private void UpdateNextLifeInfo(int playerLives)
+    {
+        var livesToDisplay = playerLives;
+
+        var _numberLives = numberLivesTextPart.GetComponent<Text>();
+        var _livesLabel = livesRemainTextPart.GetComponent<Text>();
+
+        _numberLives.text = livesToDisplay.ToString();
+        _livesLabel.text = livesToDisplay <= 1 ? SingleLiveLabel : MultipleLivesLabel;
     }
 
     public void HideNextLifeScreenScene()
     {
-        Scene activeScene = SceneManager.GetSceneByName("Next Live Screen");
-        SceneManager.UnloadSceneAsync(activeScene);
+        gameUi.SetActive(true);
+        nextLifePanel.SetActive(false);
     }
-    
 }

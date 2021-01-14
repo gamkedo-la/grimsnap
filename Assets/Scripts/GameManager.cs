@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
                 playerLives.LooseLive();
                 if (playerLives.IsNoLivesLeft())
                 {
-                    loadScene.LoadGameOverScreenScene();
+                    loadScene.DisplayGameOverScreen();
                 }
                 else
                 {
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
             if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
             {
-                loadScene.LoadWinScreenScene();
+                loadScene.DisplayWinScreen();
             }
         }
     }
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         if(!isMainSceneInBackground)
         {
             isMainSceneInBackground = true;
-            loadScene.DisplayNextLifeScreenScene(playerLives.lives);
+            loadScene.DisplayNextLifeScreen(playerLives.lives);
             Invoke("LoadLevelAgain", 3f);
         }
     }
