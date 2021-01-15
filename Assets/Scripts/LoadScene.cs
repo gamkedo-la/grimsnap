@@ -14,10 +14,20 @@ public class LoadScene : MonoBehaviour
     public GameObject numberLivesTextPart;
     public GameObject livesRemainTextPart;
 
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("Title Screen");
+    }
+
     public void LoadMainScene()
     {
         SceneManager.LoadScene("Main");
         Debug.Log("loaded Main scene");
+    }
+
+    public void LoadCreditsScene()
+    {
+        SceneManager.LoadScene("Credits Screen");
     }
 
     public void DisplayWinScreen()

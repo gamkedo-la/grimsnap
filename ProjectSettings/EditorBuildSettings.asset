@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Title Screen.unity
+    guid: 774537c2d51f147419c5d77976a21542
+  - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
@@ -17,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UIPrefabEditing/Next Live Screen.unity
     guid: 7988522807546574f8322324c2a1b83c
+  - enabled: 1
+    path: Assets/Scenes/Credits Screen.unity
+    guid: 6d4ba7a4d16410d4bbde01332522b72e
   m_configObjects: {}
