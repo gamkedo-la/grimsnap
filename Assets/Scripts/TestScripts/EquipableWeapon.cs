@@ -15,6 +15,16 @@ public class EquipableWeapon : MonoBehaviour
 
     public bool isEquiped = false;
 
+    public string ItemName;
+
+    private void Start()
+    {
+        if (ItemName == null)
+        {
+            ItemName = gameObject.name;
+
+        }
+    }
 
     public float GetRange()
     {

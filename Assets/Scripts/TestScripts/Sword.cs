@@ -16,6 +16,8 @@ public class Sword : MonoBehaviour
 
     public GameObject INV;
 
+    public string SwordName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,7 @@ public class Sword : MonoBehaviour
         thisWeapon.SetArmor(armor);
         thisWeapon.SetInvDim(InvDimensions);
         thisWeapon.InventorySprite = INV;
-
+        thisWeapon.ItemName = SwordName;
 
     }
 

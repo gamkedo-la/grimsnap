@@ -19,10 +19,11 @@ public class StatsPopup : MonoBehaviour
     void Start()
     {
 
-        N.text = InfoSource.name;
+        
         thisWeapon = InfoSource.GetComponent<EquipableWeapon>();
+        N.text = thisWeapon.ItemName;
 
-        if(thisWeapon.GetDamage() != 0)
+        if (thisWeapon.GetDamage() != 0)
         {
             properties[bookmark].text = "Damage: " + thisWeapon.GetDamage();
             bookmark++;
