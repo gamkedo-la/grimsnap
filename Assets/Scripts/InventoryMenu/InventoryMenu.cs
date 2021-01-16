@@ -114,6 +114,7 @@ public class InventoryMenu : MonoBehaviour
                 GameObject INVOBJ = Instantiate(InventorySprite, Node.transform.position, Quaternion.identity, Holder.transform);
                 INVOBJ.GetComponent<InventoryObject>().RealObject = item;
                 INVOBJ.GetComponent<InventoryObject>().dimensions = item.GetComponent<EquipableWeapon>().GetInvDim();
+                INVOBJ.GetComponent<RectTransform>().sizeDelta = item.GetComponent<EquipableWeapon>().GetInvDim() * 50;
                 INVOBJ.GetComponent<InventoryObject>().Last = Node.gameObject;
                 INVOBJ.GetComponent<InventoryObject>().Holder = Holder;
                 INVOBJ.GetComponent<Image>().sprite = item.GetComponent<EquipableWeapon>().InventorySprite;

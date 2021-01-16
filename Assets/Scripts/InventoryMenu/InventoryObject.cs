@@ -139,14 +139,19 @@ public class InventoryObject : MonoBehaviour
 
                     }
                     Location.Clear();
-                    
 
+                    Vector3 temp = O.GetComponent<RectTransform>().localPosition;
                     if (dimensions.x == 1)
                     {
-                        Vector3 temp = O.GetComponent<RectTransform>().localPosition;
                         temp.x += 25;
-                        GetComponent<RectTransform>().localPosition = temp;
                     }
+                    if (dimensions.y == 2)
+                    {
+                        temp.y -= 25;
+                        
+                    }
+                    GetComponent<RectTransform>().localPosition = temp;
+
                     Last.GetComponent<EquipmentSlot>().Contents = RealObject;
                     Equip();
                     return;
