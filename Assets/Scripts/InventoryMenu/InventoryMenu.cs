@@ -34,6 +34,8 @@ public class InventoryMenu : MonoBehaviour
 
     public GameObject WeaponHand;
 
+    public GameObject InventorySprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,11 +111,12 @@ public class InventoryMenu : MonoBehaviour
             {
 
 
-                GameObject INVOBJ = Instantiate(item.GetComponent<EquipableWeapon>().InventorySprite, Node.transform.position, Quaternion.identity, Holder.transform);
+                GameObject INVOBJ = Instantiate(InventorySprite, Node.transform.position, Quaternion.identity, Holder.transform);
                 INVOBJ.GetComponent<InventoryObject>().RealObject = item;
                 INVOBJ.GetComponent<InventoryObject>().dimensions = item.GetComponent<EquipableWeapon>().GetInvDim();
                 INVOBJ.GetComponent<InventoryObject>().Last = Node.gameObject;
                 INVOBJ.GetComponent<InventoryObject>().Holder = Holder;
+                INVOBJ.GetComponent<Image>().sprite = item.GetComponent<EquipableWeapon>().InventorySprite;
                 if(INVOBJ.GetComponent<InventoryObject>().ThisEquipment == EquipmentType.weapon)
                 {
 

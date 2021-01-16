@@ -16,7 +16,7 @@ public class EquipableWeapon : MonoBehaviour
 
     public Vector2 InvDimensions = new Vector2(0, 0);
 
-    public GameObject InventorySprite;
+    public Sprite InventorySprite;
 
     public bool isEquiped = false;
 
@@ -29,6 +29,13 @@ public class EquipableWeapon : MonoBehaviour
             ItemName = gameObject.name;
 
         }
+
+        damageFinal = Random.Range(minDamage, maxDamage + 1);
+        armorFinal = Random.Range(minArmor, maxArmor);
+
+        armorFinal = Mathf.Round(armorFinal * 10);
+        armorFinal /= 10;
+
     }
 
     public float GetRange()

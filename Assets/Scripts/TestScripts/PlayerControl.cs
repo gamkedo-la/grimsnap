@@ -126,7 +126,7 @@ public class PlayerControl : MonoBehaviour
         }
         if (click.transform.tag == "Equipment")
         {
-            //Debug.Log("hit equipment");
+            //Debug.Log("hit " + click.transform.gameObject.name);
             pickUpTarget = click.transform.gameObject;
 
         }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2690831555937100312}
   m_Layer: 0
   m_Name: Basic Club
-  m_TagString: Untagged
+  m_TagString: Equipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
   minArmor: 0
   maxArmor: 0
   InvDimensions: {x: 1, y: 2}
-  InventorySprite: {fileID: 0}
+  InventorySprite: {fileID: 21300000, guid: e22ae66ac9f2bf246ad2d130ee5ecf88, type: 3}
   isEquiped: 0
   ItemName: Basic Club
 --- !u!135 &8441271128870003978
@@ -76,7 +76,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3089282320526530386}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -99,7 +99,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.24
+      value: -0.109
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
@@ -109,7 +109,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7071068
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
@@ -119,12 +119,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071067
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff332a5c52e1d354eb2025a958995f4a,
         type: 3}
