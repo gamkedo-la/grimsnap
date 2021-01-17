@@ -861,5 +861,10 @@ PrefabInstance:
       propertyPath: m_Text
       value: GRIMSNAP
       objectReference: {fileID: 0}
+    - target: {fileID: 1298259408521838941, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dce564f4a0487b4b93ee224355a74c9, type: 3}
