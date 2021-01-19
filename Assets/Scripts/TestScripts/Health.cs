@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Debug.Log("Taking Damage" + transform.name);
+        //Debug.Log("Taking Damage" + transform.name);
         health -= damage * armorModifier;
 
         this.transform.LookAt(player.transform.position);
@@ -33,7 +33,7 @@ public class Health : MonoBehaviour
         if (audioAction != null)
             audioAction.TakeDamageAudio();
         else
-            Debug.LogError("Character Audio Profile Null" + transform.name);
+            Debug.LogWarning("Character Audio Profile Null" + transform.name);
 
         if (GetComponent<EnemyController>() != null)
         {
