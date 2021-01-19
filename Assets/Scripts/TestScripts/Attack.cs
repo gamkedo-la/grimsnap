@@ -35,7 +35,12 @@ public class Attack : MonoBehaviour
             Debug.Log(this.gameObject.name + " is attacking!");
 
             EnemyController enemyController = target.gameObject.GetComponent<EnemyController>();
-            enemyController.KnockBack(target.transform.position - this.transform.position);
+            if (enemyController != null){
+                enemyController.KnockBack(target.transform.position - this.transform.position);
+            } else {
+                Debug.Log("No Enemy Controller");
+            }
+            
 
             if (audioAction != null)
                 audioAction.AttackAudio();

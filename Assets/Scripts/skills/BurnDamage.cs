@@ -31,7 +31,10 @@ public class BurnDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<Health>().TakeDamage(damage);
+        Health health = other.gameObject.GetComponent<Health>();
+        if (health != null){
+            health.TakeDamage(damage);
+        }
     }
 
 
@@ -40,8 +43,12 @@ public class BurnDamage : MonoBehaviour
         burnInterval -= Time.deltaTime;
         if(burnInterval <= 0)
         {
-            other.gameObject.GetComponent<Health>().TakeDamage(damage);
-            burnInterval = burnReset;
+            Health health = other.gameObject.GetComponent<Health>();
+            if (health != null){
+                health.TakeDamage(damage);
+                burnInterval = burnReset;
+            }
+
 
         }
 
