@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
+    public GameObject grimsnap;
     private Health playerHealth;
     private LoadScene loadScene;
     private Lives playerLives;
@@ -38,7 +39,8 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
+            //if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
+            if (!grimsnap)
             {
                 loadScene.DisplayWinScreen();
             }
