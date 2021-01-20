@@ -150,6 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54184bbc27c669b469ea03a3634d56aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winPanel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  gameUi: {fileID: 0}
+  nextLifePanel: {fileID: 0}
+  numberLivesTextPart: {fileID: 0}
+  livesRemainTextPart: {fileID: 0}
 --- !u!4 &1164503964
 Transform:
   m_ObjectHideFlags: 0
@@ -632,5 +638,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1164503963}
+    - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadTitleScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8dce564f4a0487b4b93ee224355a74c9, type: 3}
