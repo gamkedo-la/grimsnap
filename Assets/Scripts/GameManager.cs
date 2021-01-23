@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
                 }
             }
 
-            if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3)
+            if (player.GetComponent<InventoryManager>().GetCountOfQuestItems() >= 3 && grimsnap)
             {
                 grimsnap.SetActive(true);
             }
