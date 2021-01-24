@@ -6,6 +6,9 @@ ModelImporter:
   - first:
       74: -623603649343465320
     second: IvyIdle
+  - first:
+      74: 2778791714558769819
+    second: IvyWalk
   externalObjects: {}
   materials:
     materialImportMode: 1
