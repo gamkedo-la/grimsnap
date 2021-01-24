@@ -68,10 +68,12 @@ public class MusicManager : MonoBehaviour
             case AudioState.Normal:
                 //CompareAudioState(audioState);
                 playNormalMusic.Invoke();
+                playStingers = true;
                 break;
 
             case AudioState.Battle:
                 //CompareAudioState(audioState);
+                playStingers = false;
                 playBattleMusic.Invoke();
                 break;
 

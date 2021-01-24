@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d638824431e3a740a7d4062f831a7b6, type: 3}
-  m_Name: BattleMusic
+  m_Name: Stingers
   m_EditorClassIdentifier: 
   Music:
-  - {fileID: 8300000, guid: 1195549ba1fdac74cb3ef1aabe772e84, type: 3}
+  - {fileID: 8300000, guid: 02ffa562f18ca0046a350a375c12d552, type: 3}
+  - {fileID: 8300000, guid: fed618f87bd1645439b0d1c50efb8917, type: 3}
   mixer: {fileID: 24100000, guid: c5102e472be6e9d43b368c8406be24cd, type: 2}
-  output: 1
-  Loop: 1
+  output: 5
+  Loop: 0
   bpm: 0
   bars: 0
-  Volume: -16
+  Volume: -14

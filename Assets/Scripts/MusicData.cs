@@ -47,6 +47,9 @@ public class MusicData : ScriptableObject
             case AudioOutputGroup.Ambience:
                 groupName = "Ambience";
                 break;
+            case AudioOutputGroup.Stingers:
+                groupName = "Stingers";
+                break;
             default:
                 groupName = "Master";
                 break;
