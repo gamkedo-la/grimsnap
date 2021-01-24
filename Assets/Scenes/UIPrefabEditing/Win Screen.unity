@@ -633,6 +633,41 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 661447261750654860, guid: 32a742af133c2534990a7b591963994a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 123
+      objectReference: {fileID: 0}
+    - target: {fileID: 661447261750654860, guid: 32a742af133c2534990a7b591963994a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 661447261750654860, guid: 32a742af133c2534990a7b591963994a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1262.0477
+      objectReference: {fileID: 0}
+    - target: {fileID: 661447261750654861, guid: 32a742af133c2534990a7b591963994a,
+        type: 3}
+      propertyPath: m_Text
+      value: 'You have defeated the Evil Wizard Grimsnap. Your neighbors returned
+        to normal. All seems right with the world again.
+
+
+        Though you never
+        know when Grimsnap may return to create more chaos.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 661447261750654861, guid: 32a742af133c2534990a7b591963994a,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 661447261750654861, guid: 32a742af133c2534990a7b591963994a,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 661447262468810429, guid: 32a742af133c2534990a7b591963994a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
