@@ -8,17 +8,29 @@ namespace GrimSnapAudio
         [SerializeField] AudioState playerAudioState;
         internal bool checkForEnemies = false;
         [SerializeField] int detectionRadius;
-        bool drawSphere;
+        [SerializeField] bool drawSphere;
+        bool battleStateToggle;
 
         private void Update()
         {
+            //checkForEnemies = CheckForEnemies();
+
             if (checkForEnemies)
             {
+                SetPlayerAudioState(AudioState.Battle);
+                battleStateToggle = true;
                 checkForEnemies = CheckForEnemies();
 
-                if (!checkForEnemies)
+            }
+
+            if (!checkForEnemies)
+            {
+                //SetPlayerAudioState(AudioState.Normal);
+
+                if (battleStateToggle)
                 {
                     musicManager.ExitBattleMusic();
+                    battleStateToggle = false;
                 }
             }
         }
@@ -59,7 +71,7 @@ namespace GrimSnapAudio
 
         public bool CheckForEnemies()
         {
-            Collider[] results = new Collider[2];
+            Collider[] results = new Collider[5];
 
             var enemies = Physics.OverlapSphereNonAlloc(gameObject.transform.position, detectionRadius, results, 1 << 9);
             //drawSphere = true;

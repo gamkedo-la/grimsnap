@@ -117,6 +117,13 @@ public class AudioSourceController : MonoBehaviour
         source.Play();
     }
 
+    public void PlayMusicScheduled(MusicData audioToPlay, double waitTime, GameObject calledBy) //TODO make play set of tracks
+    {
+        var source = GetNextSource();
+        SetSourceProperties(audioToPlay, source, calledBy);
+        source.PlayScheduled(waitTime);
+    }
+
     public void Stop()
     {
         sources[currentIndex].Stop();

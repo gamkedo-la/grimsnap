@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public enum AudioOutputGroup { Master, Music, PlayerSound, EnemySound, Ambience }
+public enum AudioOutputGroup { Master, Music, PlayerSound, EnemySound, Ambience, Stingers }
 
 [CreateAssetMenu(menuName = "GrimSnap/AudioData", fileName = "New AudioData.asset")]
 public class AudioData : ScriptableObject
