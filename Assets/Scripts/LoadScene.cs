@@ -10,7 +10,6 @@ public class LoadScene : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject gameUi;
     public GameObject nextLifePanel;
-    public GameObject storyIntroPanel;
 
     public GameObject numberLivesTextPart;
     public GameObject livesRemainTextPart;
@@ -65,11 +64,5 @@ public class LoadScene : MonoBehaviour
     {
         gameUi.SetActive(true);
         nextLifePanel.SetActive(false);
-    }
-
-    public void HideStoryIntroScreen()
-    {
-        gameUi.SetActive(true);
-        storyIntroPanel.SetActive(false);
     }
 }
