@@ -35,8 +35,11 @@ public class Attack : MonoBehaviour
             Debug.Log(this.gameObject.name + " is attacking!");
 
             EnemyController enemyController = target.gameObject.GetComponent<EnemyController>();
-            if (enemyController != null){
-                enemyController.KnockBack(target.transform.position - this.transform.position);
+            if (enemyController != null)
+            {
+                Vector3 targetDirection = target.transform.position - this.transform.position;
+                targetDirection.y = 0;
+                enemyController.KnockBack(targetDirection);
             } else {
                 Debug.Log("No Enemy Controller");
             }

@@ -74,6 +74,7 @@ public class EnemyController : MonoBehaviour
         {
 
             Vector3 targetDirection = Player.transform.position - transform.position;
+            targetDirection.y = 0;
             float singleStep = speed * 4.0f * Time.deltaTime;
             Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
             transform.rotation = Quaternion.LookRotation(newDirection);
