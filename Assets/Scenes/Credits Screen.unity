@@ -782,39 +782,41 @@ PrefabInstance:
     - target: {fileID: 1298259408521838941, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
       propertyPath: m_Text
-      value: "\u2022 Brian J. Boucher - Project lead, core gameplay, model integration,
-        placeholder quest item pickups, collectibles, win and game over screen functionality,
+      value: "\u2022 Brian J. Boucher - Project lead, core gameplay, art integration,
+        quest item pickups, collectibles, win and game over screen functionality,
         plant collisions, minimap, debug cheats, player walk animation, attack animation,
         knockback, scale adjustments, credits screen, weapon to hand binding, scene
-        reorganization, title background image\n\u2022 Maimi Boucher - Sword model,
-        model optimizations, over a dozen rock variations, tree models, map layout,
-        nav mesh updates, chest and trunk models, bush (with and without berries),
-        starting point tweaks, club and axe weapons, ivy character, map edits, grimsnap
-        model, health pass, flowers, player death screen, start screen, menu button\n\u2022
-        Will McKay - Enemy tracking AI, wandering support, weapon randomization,
-        item dropping, inventory system (including selection, rearrangement, equip
-        limits), item stats summary tool tips, character armor stat, player xp and
-        leveling system, projectile functionality, fireball explosion, skill unlock,
-        level up notification, weapon hookups, inventory sprites\n\u2022 Roc Lee
-        - Background music, battle music, audio implementation, music manager, dynamic
-        song transition functionality, game sounds (including player attack, enemy
-        damage, roll), additional audio adjustments, attack rate controls, attack
-        trigger hookups\n\u2022 Cassidy Noble - Troll and goblin model/animations
-        (including damage and death animations), related animation controllers\n\u2022
-        Justin Chin - ProBuilder integration, building and hut models, rocks, water
-        fountain, sword platform, house, attack sounds (high and low, player and
-        enemy), campfire\n\u2022 Jonathan \"jay513\" Treglia - Player control adjustments,
-        targeting improvements, player health system, additiontal vector helper functions,
-        melee touch up\n\u2022 Philip Greene - Grass texture, ground details, UI
-        health orb animation, enemy health UI, stone border for minimap, health system
-        refactor, sliced fill art (incl. xp bar), font integration\n\u2022 reminder
-        compatibility improvements\n\u2022 Grygoriy Kulesko - Run feature, life counter
-        and related reset, lives display, game over screen improvement, generalized
-        UI panels, UI code refactor\n\u2022 Andy King - Dissolve/dither shader with
-        vertex painting, terrain paths test, repo pull Agust\xEDn Mart\xEDnez - Chest
-        model and texture\n\u2022 Bilal A. Cheema - Attack indicators, additional
-        player mouse control work, start of enemy patrol script, goblin animation
-        integration (idle, walk, patrol, attack)\n\nWe made this game in HomeTeamGameDev.com
+        reorganization, title background image, instructions, UI reskin, patrol routes\n\u2022
+        Maimi Boucher - Sword model, model optimizations, over a dozen rock variations,
+        tree models, map layout, nav mesh updates, chest and trunk models, bush (with
+        and without berries), starting point tweaks, club and axe weapons, ivy character,
+        map edits, grimsnap model, health pass, flowers, player death screen, start
+        screen, menu button, environment art placement\n\u2022 Will McKay - Enemy
+        tracking AI, wandering support, weapon randomization, item dropping, inventory
+        system (including selection, rearrangement, equip limits), item stats summary
+        tool tips, character armor stat, player xp and leveling system, projectile
+        functionality, fireball explosion, skill unlock, level up notification, weapon
+        hookups, inventory sprites\n\u2022 Roc Lee - Background music, battle music,
+        audio implementation, music manager, dynamic song transition functionality,
+        game sounds (including player attack, enemy damage, roll), additional audio
+        adjustments, attack rate controls, attack trigger hookups, song change stingers\n\u2022
+        Cassidy Noble - Troll and goblin model/animations (including damage and death
+        animations), related animation controllers\n\u2022 Justin Chin - ProBuilder
+        integration, building and hut models, rocks, water fountain, sword platform,
+        house, attack sounds (high and low, player and enemy), campfire\n\u2022 Jonathan
+        \"jay513\" Treglia - Player control adjustments, targeting improvements,
+        player health system, additiontal vector helper functions, melee touch up\n\u2022
+        Philip Greene - Grass texture, ground details, UI health orb animation, enemy
+        health UI, stone border for minimap, health system refactor, sliced fill
+        art (incl. xp bar), font integration, git reminder compatibility improvements\n\u2022
+        Grygoriy Kulesko - Run feature, life counter and related reset, lives display,
+        game over screen improvement, generalized UI panels, UI code refactor\n\u2022
+        Andy King - Dissolve/dither shader with vertex painting, terrain paths test,
+        repo pull\n\u2022 Agust\xEDn Mart\xEDnez - Model and texture for chest and
+        fence\n\u2022 Bilal A. Cheema - Attack indicators, additional player mouse
+        control work, start of enemy patrol script, goblin animation integration
+        (idle, walk, patrol, attack)\n\u2022 Philip \u2018MrPhil\u2019 Ludington
+        - Enemy physics issue detection and workaround\n\nWe made this game in HomeTeamGameDev.com
         Outpost!"
       objectReference: {fileID: 0}
     - target: {fileID: 1298259408521838941, guid: 8dce564f4a0487b4b93ee224355a74c9,
@@ -846,7 +848,7 @@ PrefabInstance:
     - target: {fileID: 1298259408521838942, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 542
+      value: 836.5437
       objectReference: {fileID: 0}
     - target: {fileID: 1298259408521838942, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
@@ -856,7 +858,7 @@ PrefabInstance:
     - target: {fileID: 1298259408521838942, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 377
+      value: 483.04706
       objectReference: {fileID: 0}
     - target: {fileID: 1298259408521838942, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
