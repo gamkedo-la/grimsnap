@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Movement;
@@ -20,6 +21,8 @@ public class PlayerControl : MonoBehaviour
     TargetHealth targetHealth;
     public bool canDealDamageThisFrame = false;
 
+    public Transform debugSpot;
+
     // Need to pull speed from movementData script, meleeRange and damage from equipped melee
     public float speed = 50;
     public float meleeRange = 2;
@@ -27,7 +30,6 @@ public class PlayerControl : MonoBehaviour
     public float armor = 0;
 
     //Data from ray cast
-    RaycastHit raycastHit;
     RaycastHit click;
     Health target;
 
@@ -71,8 +73,6 @@ public class PlayerControl : MonoBehaviour
             }
             isRunning |= playerInput.running;
             
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out raycastHit, 100);
             //if (Physics.Raycast(ray, out raycastHit, 100))
             //{
 
@@ -81,7 +81,7 @@ public class PlayerControl : MonoBehaviour
                 
             //}
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -114,7 +114,7 @@ public class PlayerControl : MonoBehaviour
 
     private void CheckForAction()
     {
-        if (raycastHit.transform == null) return;
+        if (click.transform == null) return;
         if (click.transform.tag == "Enemy")
         {
             target = click.transform.GetComponent<Health>();
@@ -168,7 +168,7 @@ public class PlayerControl : MonoBehaviour
     private void MoveToTerrain()
     {
         float number = .1f; // Move this elsewhere
-        if (VectorMath.IsAroundAtPoint(transform.position, raycastHit.point, number))
+        if (VectorMath.IsAroundAtPoint(transform.position, click.point, number))
         {
             animator.SetBool("isWalking", false);
             StopRunning();
@@ -177,7 +177,37 @@ public class PlayerControl : MonoBehaviour
         else
         {
             animator.SetBool("isWalking", true);
-            move.MoveToTarget(GetCurrentSpeed(), raycastHit.point);
+            Vector3 terrainPoint;
+            if (click.transform.tag.Equals("Ground"))
+            {
+                terrainPoint = click.point;
+            }
+            else
+            {
+                Collider clickCollider = click.collider;
+                Transform transformParent = clickCollider.transform;
+
+                while (transformParent.transform.parent != null)
+                {
+                    Collider componentInParent = transformParent.GetComponentInParent<Collider>();
+                    if (componentInParent != null)
+                    {
+                        clickCollider = componentInParent;
+                    }
+                    transformParent = transformParent.transform.parent;
+                    Debug.Log(clickCollider.name);
+                }
+                
+                Bounds clickColliderBounds = clickCollider.bounds;
+                terrainPoint = clickColliderBounds.ClosestPoint(transform.position);
+
+                // debugSpot.position = terrainPoint + Vector3.up*2.0f;
+                //keep on ground
+                terrainPoint.y = 0.2f;
+            }
+
+            // move.MoveToTarget(GetCurrentSpeed(), raycastHit.point);
+            move.MoveToTarget(GetCurrentSpeed(), terrainPoint);
         }
     }
 
@@ -232,7 +262,6 @@ public class PlayerControl : MonoBehaviour
 
     public void ClearTarget()
     {
-        raycastHit = new RaycastHit();
         click = new RaycastHit();
         move.StopMoving();
     }
