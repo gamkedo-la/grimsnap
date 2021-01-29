@@ -33,5 +33,7 @@ namespace GrimSnapAudio
         void AttackAudio();
 
         void TakeDamageAudio();
+
+        void GruntAudio();
     }
 }

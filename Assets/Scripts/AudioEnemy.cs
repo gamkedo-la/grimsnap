@@ -12,5 +12,12 @@
             if (GetEvent(0) != null)
                 controller.PlayAudio(GetEvent(0), gameObject);
         }
+
+        public void GruntAudio()
+        {
+            if (GetEvent(1) != null)
+                controller.PlayAudio(GetEvent(1), gameObject);
+        }
+
     }
 }

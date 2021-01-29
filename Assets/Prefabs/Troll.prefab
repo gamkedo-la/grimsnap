@@ -306,10 +306,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf660a2af06cc5c4db5a74c3041ff03e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 3772626430037230174}
+  controller: {fileID: 0}
   audioEvents:
   - EventName: TakeDamage
     audioData: {fileID: 11400000, guid: afa7cbeab783e5846baad92bedc24c37, type: 2}
+  - EventName: GruntAudio
+    audioData: {fileID: 11400000, guid: 7a705283a84123147bdf70889a0dbd48, type: 2}
 --- !u!114 &3772626430037230174
 MonoBehaviour:
   m_ObjectHideFlags: 0

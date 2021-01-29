@@ -58,6 +58,11 @@ namespace GrimSnapAudio
             // Debug.LogWarning("Player Damage Audio");
         }
 
+        public void GruntAudio()
+        {
+
+        }
+
         public void ItemPickUpAudio()
         {
             if (GetEvent(2) != null)

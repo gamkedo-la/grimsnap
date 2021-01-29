@@ -279,6 +279,8 @@ MonoBehaviour:
   audioEvents:
   - EventName: TakeDamage
     audioData: {fileID: 11400000, guid: afa7cbeab783e5846baad92bedc24c37, type: 2}
+  - EventName: GruntAudio
+    audioData: {fileID: 11400000, guid: 7a705283a84123147bdf70889a0dbd48, type: 2}
 --- !u!114 &3347610659283960594
 MonoBehaviour:
   m_ObjectHideFlags: 0

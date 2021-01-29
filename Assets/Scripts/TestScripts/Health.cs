@@ -29,9 +29,12 @@ public class Health : MonoBehaviour
         health -= damage * armorModifier;
 
         this.transform.LookAt(player.transform.position);
-        
+
         if (audioAction != null)
+        {
             audioAction.TakeDamageAudio();
+            audioAction.GruntAudio();
+        }
         else
             Debug.LogWarning("Character Audio Profile Null" + transform.name);
 
@@ -51,7 +54,7 @@ public class Health : MonoBehaviour
     {
         return health;
     }
-    
+
     public void Refill()
     {
         health = maxHealth;
@@ -63,5 +66,5 @@ public class Health : MonoBehaviour
         player.GetComponent<PlayerLevel>().GainEXP(GetComponent<EnemyController>().EXPGiven);
         Destroy(this.gameObject);
     }
-    
+
 }
