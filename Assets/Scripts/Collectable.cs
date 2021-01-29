@@ -10,6 +10,11 @@ public class Collectable : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             other.GetComponent<InventoryManager>().CollectQuestItem(this);
+
+            var audio = other.GetComponent<GrimSnapAudio.AudioPlayer>();
+
+            if (audio != null)
+                audio.ItemPickUpAudio();
         }
     }
 }
