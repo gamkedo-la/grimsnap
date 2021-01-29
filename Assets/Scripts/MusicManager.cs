@@ -17,6 +17,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] AudioMixer mixer; //Todo, add Snapshot changes to Music Change Transitions
     public AudioMixerSnapshot gameStartSnapshot;
     public AudioMixerSnapshot normalMusicSnapshot;
+    public AudioMixerSnapshot battleStateSnapshot;
     public AudioMixerSnapshot fadeOutMusicSnapshot;
     public float musicFadeTime = 1f;
 
@@ -74,6 +75,7 @@ public class MusicManager : MonoBehaviour
             case AudioState.Battle:
                 //CompareAudioState(audioState);
                 playStingers = false;
+                battleStateSnapshot.TransitionTo(musicFadeTime);
                 playBattleMusic.Invoke();
                 break;
 

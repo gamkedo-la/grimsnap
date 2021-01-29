@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442ab72ee13a26049afb8c61bea43b7f, type: 3}
   m_Name: Ambience
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - {fileID: 8300000, guid: 4792c619e9ed83f45a6b79629f802618, type: 3}
   mixer: {fileID: 24100000, guid: c5102e472be6e9d43b368c8406be24cd, type: 2}
   output: 4
-  Loop: 0
+  Loop: 1
   Volume: 0
   Pitch: 0
-  SpatialBlend: 1
+  SpatialBlend: 0
   RandomVolume: 0
   RandomizeVolume: 0
   RandomPitch: 0

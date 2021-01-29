@@ -52,6 +52,32 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!245 &-5409419881492625706
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Battle
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 4802436a7f500cd4ab27a254314386da
+  m_FloatValues:
+    4a86afe38ec3d2347809dd289afba06f: 4.6
+    0c1bdd65fc5c5874b9074c129cab4188: -9045
+    385863f6c7e95a84f8ee738fa6f4ee6d: 2.9
+    17864a372282f414bba5da45f305c034: -637
+    d22f504765d1988429e4e01bd9cb07f1: 160
+    8a7c5bb8901ea8d48b18949cbe6fc2f0: 0
+    2bf2a24938dca3442ad457f0eaeae409: 0
+    f5ed1f79905b66048ace565cbff19e88: -80
+    44a90f6ae390e514ea7225fea3302907: -6.133707
+    5edf6cdcb143f8d4fa5a1cacce0d792f: 91.7
+    5a57bced380d7844786cf9d9d2add45e: -1513
+    530c461f1f9c32b4daff6ad9c1159e91: 0
+    bbecc74ffd99f9e4e88cca84f67d69ad: -10000
+    3611a0bf6298748459dc25c077559be1: 1756
+  m_TransitionOverrides:
+    44a90f6ae390e514ea7225fea3302907: 1
 --- !u!243 &-4647806513901056705
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -181,6 +207,7 @@ AudioMixerController:
   - {fileID: 24500006}
   - {fileID: 858756445402245557}
   - {fileID: -3744500737012525193}
+  - {fileID: -5409419881492625706}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -198,7 +225,7 @@ AudioMixerController:
     - ca65cffaff64e734b9460e9d12d24cbe
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: 858756445402245557}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -285,6 +312,7 @@ AudioMixerSnapshotController:
     d22f504765d1988429e4e01bd9cb07f1: 160
     8a7c5bb8901ea8d48b18949cbe6fc2f0: 0
     2bf2a24938dca3442ad457f0eaeae409: 0
+    f5ed1f79905b66048ace565cbff19e88: 2.850226
     44a90f6ae390e514ea7225fea3302907: -6.133707
     5edf6cdcb143f8d4fa5a1cacce0d792f: 91.7
     5a57bced380d7844786cf9d9d2add45e: -1513

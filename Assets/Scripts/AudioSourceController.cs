@@ -10,7 +10,7 @@ public class AudioSourceController : MonoBehaviour
     [SerializeField] Vector3 position;
 
     #region Controller Functions
-    void Start()
+    void Awake()
     {
         for (int i = 0; i < maxSources; ++i)
         {

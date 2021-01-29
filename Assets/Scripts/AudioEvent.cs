@@ -6,6 +6,7 @@ public class AudioEvent : MonoBehaviour
 {
     public AudioData audioData;
     [SerializeField] AudioSourceController controller;
+    public bool playOnStart;
 
     void Start()
     {
@@ -17,6 +18,11 @@ public class AudioEvent : MonoBehaviour
             {
                 controller = gameObject.AddComponent<AudioSourceController>();
             }
+        }
+
+        if (playOnStart)
+        {
+            PlayAudioEvent();
         }
     }
 
