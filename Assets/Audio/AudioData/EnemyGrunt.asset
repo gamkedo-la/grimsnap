@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442ab72ee13a26049afb8c61bea43b7f, type: 3}
   m_Name: EnemyGrunt
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - {fileID: 8300000, guid: 2a22854bfb78863418bec2b3577f5774, type: 3}
+  - {fileID: 8300000, guid: bc02fa3fd37ee61418b276b58ab2b303, type: 3}
+  - {fileID: 8300000, guid: c0e577485764de04ab7b4ee00c4d2d93, type: 3}
   mixer: {fileID: 24100000, guid: c5102e472be6e9d43b368c8406be24cd, type: 2}
   output: 3
   Loop: 0
   Volume: 0
   Pitch: 0
-  SpatialBlend: 1
-  RandomVolume: 0
-  RandomizeVolume: 0
-  RandomPitch: 0
-  RandomizePitch: 0
+  SpatialBlend: 0.125
+  RandomVolume: 0.43
+  RandomizeVolume: 1
+  RandomPitch: 0.82
+  RandomizePitch: 1

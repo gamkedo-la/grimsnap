@@ -36,4 +36,9 @@ public class AudioEvent : MonoBehaviour
         controller.PlayAudio(data, gameObject);
 
     }
+
+    public AudioSourceController GetAudioController()
+    {
+        return controller;
+    }
 }

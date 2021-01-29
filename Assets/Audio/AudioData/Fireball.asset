@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442ab72ee13a26049afb8c61bea43b7f, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - {fileID: 8300000, guid: 526065f63e1e5dd499ecec67b4885ea7, type: 3}
+  - {fileID: 8300000, guid: aa51096b80312b24da7dee454cffcdd6, type: 3}
+  - {fileID: 8300000, guid: 3daf70b00c6f7f844b6346521d17ccc6, type: 3}
   mixer: {fileID: 24100000, guid: c5102e472be6e9d43b368c8406be24cd, type: 2}
   output: 2
   Loop: 0
   Volume: 0
   Pitch: 0
-  SpatialBlend: 1
+  SpatialBlend: 0
   RandomVolume: 0
   RandomizeVolume: 0
-  RandomPitch: 0
-  RandomizePitch: 0
+  RandomPitch: 1.02
+  RandomizePitch: 1

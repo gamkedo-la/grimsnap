@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4479831648174846744}
   - component: {fileID: 809926520152056413}
   - component: {fileID: 2117835583714360313}
+  - component: {fileID: 3062960499143536181}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Untagged
@@ -60,6 +61,10 @@ MonoBehaviour:
   damage: 10
   lifeTime: 1
   splitLife: 0.4
+  fireballAudio: {fileID: 11400000, guid: 7ad42b0235d224f4fb77d391af57cb79, type: 2}
+  explosionAudio: {fileID: 6498279377547711464, guid: be101cbcda9d0054491343fba5fc2592,
+    type: 3}
+  controller: {fileID: 3062960499143536181}
 --- !u!135 &809926520152056413
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -89,6 +94,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3062960499143536181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383991646041886301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46208f379371b424aa641db818179c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData: {fileID: 0}
+  sources: []
+  currentIndex: 0
+  maxSources: 5
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &8888932526924826165
 GameObject:
   m_ObjectHideFlags: 0

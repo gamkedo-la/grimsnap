@@ -24,5 +24,5 @@ MonoBehaviour:
   SpatialBlend: 0
   RandomVolume: 0
   RandomizeVolume: 0
-  RandomPitch: 0
-  RandomizePitch: 0
+  RandomPitch: 0.35
+  RandomizePitch: 1

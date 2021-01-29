@@ -22,7 +22,7 @@ MonoBehaviour:
   Volume: 0
   Pitch: -2
   SpatialBlend: 0
-  RandomVolume: 0
-  RandomizeVolume: 0
-  RandomPitch: 0
-  RandomizePitch: 0
+  RandomVolume: 0.34
+  RandomizeVolume: 1
+  RandomPitch: 0.82
+  RandomizePitch: 1

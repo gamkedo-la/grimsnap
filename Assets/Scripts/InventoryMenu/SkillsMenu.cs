@@ -10,6 +10,9 @@ public class SkillsMenu : MonoBehaviour
 
     public List<SkillButton> skillButtons = new List<SkillButton>();
 
+    public AudioEvent audioEvent;
+    public AudioData skillOpenAudio;
+    public AudioData skillCloseAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,11 @@ public class SkillsMenu : MonoBehaviour
                 Player.OpenMenu();
                 Active = true;
                 RefreshButtons();
-   
+
+                if (audioEvent != null)
+                {
+                    audioEvent.GetAudioController().PlayAudio(skillOpenAudio, gameObject);
+                }
 
             }
             else if (Active == true)
@@ -42,6 +49,11 @@ public class SkillsMenu : MonoBehaviour
                 GetComponent<CanvasGroup>().blocksRaycasts = false;
                 Player.CloseMenu();
                 Active = false;
+
+                if (audioEvent != null)
+                {
+                    audioEvent.GetAudioController().PlayAudio(skillCloseAudio, gameObject);
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.I))

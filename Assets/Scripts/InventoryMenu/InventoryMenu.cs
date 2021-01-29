@@ -36,6 +36,10 @@ public class InventoryMenu : MonoBehaviour
 
     public GameObject InventorySprite;
 
+    public AudioEvent audioEvent;
+    public AudioData inventoryOpenAudio;
+    public AudioData inventoryCloseAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +62,12 @@ public class InventoryMenu : MonoBehaviour
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
                 Player.OpenMenu();
                 Active = true;
-                
+
+                if (audioEvent != null)
+                {
+                    audioEvent.GetAudioController().PlayAudio(inventoryOpenAudio, gameObject);
+                }
+
             }
             else if (Active == true)
             {
@@ -67,6 +76,11 @@ public class InventoryMenu : MonoBehaviour
                 GetComponent<CanvasGroup>().blocksRaycasts = false;
                 Player.CloseMenu();
                 Active = false;
+
+                if (audioEvent != null)
+                {
+                    audioEvent.GetAudioController().PlayAudio(inventoryCloseAudio, gameObject);
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.S))
@@ -85,29 +99,29 @@ public class InventoryMenu : MonoBehaviour
         temp = item.GetComponent<EquipableWeapon>().GetInvDim();
         ToCheck.Clear();
 
-        foreach(InventoryGridNode Node in Grid.AllTiles)
+        foreach (InventoryGridNode Node in Grid.AllTiles)
         {
-            if(Node.Contents == null && Node.Row <= Grid.Rows - (temp.y-1) && Node.Column <= Grid.Columns - (temp.x-1))
+            if (Node.Contents == null && Node.Row <= Grid.Rows - (temp.y - 1) && Node.Column <= Grid.Columns - (temp.x - 1))
             {
 
-                for(int c = 0; c< temp.x; c++)
+                for (int c = 0; c < temp.x; c++)
                 {
-                    for (int r = 0; r<temp.y; r++)
+                    for (int r = 0; r < temp.y; r++)
                     {
                         ToCheck.Add(Grid.NodeAtCR(Node.Column + c, Node.Row + r));
 
                     }
-                                       
+
                 }
             }
 
             bool OpenSpot = false;
-            foreach(InventoryGridNode inventoryGridNode in ToCheck)
+            foreach (InventoryGridNode inventoryGridNode in ToCheck)
             {
                 OpenSpot = CheckNode(inventoryGridNode);
 
             }
-            if(OpenSpot == true)
+            if (OpenSpot == true)
             {
 
 
@@ -118,7 +132,7 @@ public class InventoryMenu : MonoBehaviour
                 INVOBJ.GetComponent<InventoryObject>().Last = Node.gameObject;
                 INVOBJ.GetComponent<InventoryObject>().Holder = Holder;
                 INVOBJ.GetComponent<Image>().sprite = item.GetComponent<EquipableWeapon>().InventorySprite;
-                if(INVOBJ.GetComponent<InventoryObject>().ThisEquipment == EquipmentType.weapon)
+                if (INVOBJ.GetComponent<InventoryObject>().ThisEquipment == EquipmentType.weapon)
                 {
 
                     INVOBJ.GetComponent<InventoryObject>().WorldSlot = WeaponHand;
@@ -137,7 +151,7 @@ public class InventoryMenu : MonoBehaviour
                 return true;
 
             }
-            if(OpenSpot == false)
+            if (OpenSpot == false)
             {
                 Debug.Log("checked " + Node.Column + "," + Node.Row + ", does not fit here");
                 ToCheck.Clear();
@@ -149,11 +163,11 @@ public class InventoryMenu : MonoBehaviour
 
     bool CheckNode(InventoryGridNode inventoryGridNode)
     {
-        if(inventoryGridNode == null)
+        if (inventoryGridNode == null)
         {
             return false;
         }
-        if(inventoryGridNode.Contents == null)
+        if (inventoryGridNode.Contents == null)
         {
 
             return true;
@@ -177,7 +191,7 @@ public class InventoryMenu : MonoBehaviour
         damage = 0;
         range = 0;
         armor = 0;
-        foreach(GameObject E in EquipedItems)
+        foreach (GameObject E in EquipedItems)
         {
             damage += E.GetComponent<EquipableWeapon>().GetDamage();
             range += E.GetComponent<EquipableWeapon>().GetRange();
@@ -188,6 +202,6 @@ public class InventoryMenu : MonoBehaviour
 
     }
 
-   
+
 
 }

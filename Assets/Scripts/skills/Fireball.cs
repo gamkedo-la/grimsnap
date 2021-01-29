@@ -23,10 +23,21 @@ public class Fireball : MonoBehaviour
     public float lifeTime;
     public float splitLife;
 
+    public AudioData fireballAudio;
+    public GameObject explosionAudio;
+    public AudioSourceController controller;
+    bool hasExploded = false;
+
     // Start is called before the first frame update
     void Start()
     {
         burnReset = burnTimer;
+
+        if (controller != null)
+        {
+            if (fireballAudio != null)
+                controller.PlayAudio(fireballAudio, gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -46,7 +57,7 @@ public class Fireball : MonoBehaviour
         }
 
         lifeTime -= Time.deltaTime;
-        if(lifeTime <= 0)
+        if (lifeTime <= 0)
         {
             Destroy(gameObject);
         }
@@ -55,7 +66,7 @@ public class Fireball : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("fireball hit " + other.gameObject.name);
-        if(other.gameObject.tag == "Enemy" && ignore != other.gameObject)
+        if (other.gameObject.tag == "Enemy" && ignore != other.gameObject)
         {
             other.gameObject.GetComponent<Health>().TakeDamage(damage);
 
@@ -92,14 +103,23 @@ public class Fireball : MonoBehaviour
                 Instantiate(burnPatch, other.transform.position, Quaternion.identity, other.transform);
 
             }
-            if(explode == true)
+            if (explode == true)
             {
 
                 GameObject E = Instantiate(explosion, transform.position, Quaternion.identity);
                 E.GetComponent<Explosion>().damage = damage;
             }
 
-            
+
+            if (explosionAudio != null)
+            {
+                if (!hasExploded)
+                {
+                    GameObject explode = Instantiate(explosionAudio, transform.position, Quaternion.identity);
+                    explode.GetComponent<AudioAtPoint>().PlayAudioAtPoint(gameObject);
+                    hasExploded = true;
+                }
+            }
 
             Destroy(gameObject);
 
