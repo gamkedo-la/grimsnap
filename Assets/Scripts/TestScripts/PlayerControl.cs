@@ -36,13 +36,14 @@ public class PlayerControl : MonoBehaviour
     public GameObject pickUpTarget;
 
     private bool MenuOpen = false;
-    
+
     private bool isRunning = false;
 
     [SerializeField]
     private GameObject warpPoint1, warpPoint2, warpPoint3, warpPoint4;
 
     //Other entities such as enemy and misc need access to MoveToTerrain and FollowAndAttackTarget... move to generic class and change to return bools?
+    [SerializeField] GrimSnapAudio.AudioPlayer playerAudio;
 
     void Start()
     {
@@ -63,22 +64,22 @@ public class PlayerControl : MonoBehaviour
     /// <summary>
     /// Gives raycastHit data on left click and updates target with a new transform if a new target is aquired
     /// </summary>
-    void CheckPrimaryButtonForTarget() 
+    void CheckPrimaryButtonForTarget()
     {
-        if (playerInput.leftClick && MenuOpen == false) 
+        if (playerInput.leftClick && MenuOpen == false)
         {
             if (!isRunning && playerInput.running)
             {
                 Debug.Log("player starts running");
             }
             isRunning |= playerInput.running;
-            
+
             //if (Physics.Raycast(ray, out raycastHit, 100))
             //{
 
             //       //target = raycastHit.transform.GetComponent<Health>();
-                    
-                
+
+
             //}
         }
         if (Input.GetMouseButton(0))
@@ -135,7 +136,7 @@ public class PlayerControl : MonoBehaviour
             targetHealth.HideTargetHealth();
         }
 
-            MoveToTerrain();
+        MoveToTerrain();
     }
 
     private void FollowTarget()
@@ -161,7 +162,7 @@ public class PlayerControl : MonoBehaviour
 
     private float GetCurrentSpeed()
     {
-        float currentSpeed = isRunning || playerInput.running?speed*2f:speed;
+        float currentSpeed = isRunning || playerInput.running ? speed * 2f : speed;
         return currentSpeed;
     }
 
@@ -197,7 +198,7 @@ public class PlayerControl : MonoBehaviour
                     transformParent = transformParent.transform.parent;
                     Debug.Log(clickCollider.name);
                 }
-                
+
                 Bounds clickColliderBounds = clickCollider.bounds;
                 terrainPoint = clickColliderBounds.ClosestPoint(transform.position);
 
@@ -246,6 +247,11 @@ public class PlayerControl : MonoBehaviour
                 collision.transform.position += (Vector3.down * 20);
             }
 
+            if (playerAudio != null)
+            {
+                playerAudio.ItemPickUpAudio();
+            }
+
             pickUpTarget = null;
         }
     }
@@ -266,7 +272,8 @@ public class PlayerControl : MonoBehaviour
         move.StopMoving();
     }
 
-    public void ToggleCanDealDamageThisFrame(){
+    public void ToggleCanDealDamageThisFrame()
+    {
         canDealDamageThisFrame = true;
     }
 }

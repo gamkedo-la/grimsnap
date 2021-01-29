@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 442ab72ee13a26049afb8c61bea43b7f, type: 3}
   m_Name: ItemPickUp
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - {fileID: 8300000, guid: 91c06b5d897d90340a345bc8c041a810, type: 3}
+  - {fileID: 8300000, guid: ee57805a8571e6e44ab63843b8e10fef, type: 3}
+  - {fileID: 8300000, guid: 6c8cfb7b84f00da4d9c1608ca9f244bd, type: 3}
   mixer: {fileID: 24100000, guid: c5102e472be6e9d43b368c8406be24cd, type: 2}
   output: 2
   Loop: 0

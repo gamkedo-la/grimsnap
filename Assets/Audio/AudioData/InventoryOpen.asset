@@ -17,7 +17,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a73735f210191c4e8f1d6b3ca7391cf, type: 3}
   - {fileID: 8300000, guid: 0276ceda53e38744289b66dffb509221, type: 3}
   mixer: {fileID: 24100000, guid: c5102e472be6e9d43b368c8406be24cd, type: 2}
-  output: 6
+  output: 2
   Loop: 0
   Volume: 0
   Pitch: 0

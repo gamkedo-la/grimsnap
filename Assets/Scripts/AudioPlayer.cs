@@ -58,6 +58,11 @@ namespace GrimSnapAudio
             // Debug.LogWarning("Player Damage Audio");
         }
 
+        public void ItemPickUpAudio()
+        {
+            if (GetEvent(2) != null)
+                controller.PlayAudio(GetEvent(2), gameObject);
+        }
         //public void PlayerBattleStateLoop()
         //{
         //    do
