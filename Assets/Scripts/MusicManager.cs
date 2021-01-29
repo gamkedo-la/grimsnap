@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public enum AudioState { Normal, Battle, GameOver }
 public class MusicManager : MonoBehaviour
 {
+    public static MusicManager instance;
     [Header("Music Manager Config")]
     public bool playStingers;
     [SerializeField] AudioState currentAudioState;
@@ -28,6 +29,19 @@ public class MusicManager : MonoBehaviour
     public UnityEvent playGameOverMusic;
     public UnityEvent playStinger;
     public static Action<AudioState> notifyMusicManager;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else if (instance != null)
+        {
+            Destroy(this);
+        }
+    }
 
     #region Music Initialization
     void Start()
