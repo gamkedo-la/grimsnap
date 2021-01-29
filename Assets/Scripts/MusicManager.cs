@@ -48,7 +48,7 @@ public class MusicManager : MonoBehaviour
     {
         notifyMusicManager += CompareAudioState;
 
-        UpdateAudioState(AudioState.Normal);
+        UpdateAudioState(currentAudioState);
         MusicChange(currentAudioState);
 
         InitializeMusicList();

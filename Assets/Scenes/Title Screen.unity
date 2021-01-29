@@ -869,6 +869,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5409419881492625706, guid: c5102e472be6e9d43b368c8406be24cd,
         type: 2}
+    - target: {fileID: 2157178792655616983, guid: abd89174c0ee54a4ab8e1510bb6bf0c4,
+        type: 3}
+      propertyPath: currentAudioState
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5891397109778541112, guid: abd89174c0ee54a4ab8e1510bb6bf0c4,
         type: 3}
       propertyPath: music
@@ -955,6 +960,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1068051333}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1068051336 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2157178792655616983, guid: abd89174c0ee54a4ab8e1510bb6bf0c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1068051333}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c24ab51269b1ac4b8004c1911802494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1164503962
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,7 +1621,7 @@ PrefabInstance:
     - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
@@ -1647,6 +1664,31 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: fb9d6b5e786b6a24ca803ce535d6327e,
         type: 2}
+    - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1068051336}
+    - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: ExitBattleMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1298259408290055300, guid: 8dce564f4a0487b4b93ee224355a74c9,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1298259408290055301, guid: 8dce564f4a0487b4b93ee224355a74c9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
